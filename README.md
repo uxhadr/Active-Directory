@@ -39,7 +39,9 @@ I right-clicked on Adminstrator > Properties. I checdked Password never expires 
 I I right-clicked on Adminstrator > Set Password. 
 I created a password and then signed out, then logged in as the Adminstrator.
 Once logged in, I opened `Computer Mangement` and deleted the `User`account so that I now only had one account on the PC.
-
+I opened the Settings and went to `Apps & features` > Optional features > Add a feature > RSAT Tools: (Active Directory Certificate Service Tools,  AD Domain Services,
+DHCP Server Tools, DNS Server Tools, Group Policy, Remote Desktop, Server Manager > Install.
+RSAT Tools will give me the ability to Active Directory Users and Services on a Windows 10 desktop.
 
 
 

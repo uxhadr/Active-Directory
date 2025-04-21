@@ -38,7 +38,7 @@ Next I wnet back to my Windows 10 computer. Once it was done setting up, I opene
 I right-clicked on Adminstrator > Properties. I checdked Password never expires and unchecked all the other boxes,and hit OK.
 I I right-clicked on Adminstrator > Set Password. 
 I created a password and then signed out, then logged in as the Adminstrator.
-
+Once logged in, I opened `Computer Mangement` and deleted the `User`account so that I now only had one account on the PC.
 
 
 

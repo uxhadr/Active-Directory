@@ -120,6 +120,8 @@ I then created another one but this time I named it `Personal`.
  I then opened up the security groups and went to the `Members` tab and added the user `John` into them.
  To confirm that they're added, I opened up the HR OU and clicked on John's name, then clicked on `Member of` and HR and Personal showed up.
  [insert pic]
+
+ # Permissioning the folder: 
  
  
 

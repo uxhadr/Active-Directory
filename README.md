@@ -84,7 +84,19 @@ I went back on `Desktop1`, opened AD Users and Computers then went into the `HR`
 [insert pic]
 
 # Common Active Directory Issues
+I logged into my `helpdesk` account and pinged John's computer using `-t` which sends a continuous ping.
+I ran the command prompt as an admin and ran the cmd `gpresult /r>c:\results.txt`
+This ran the command and put the findings in a text file called `results.txt` on my PC.
+[Insert]
 
+Since I set the lockout policy to 4 attempts. I intentionally tried to lock John out of his account my attempting the wrong password 4 times.
+[insert pic of locked out account]
+
+This scenario assumes that John calls the helpdesk and now as the helpdesk we have to help him log back in. So on my helpdesk account I opened AD Users and Computers. Clicked on his OU which is `HR`. Then double-clicked on `John` > Account > Unlock account > OK. 
+Now the helpdesk asks John to try and log in again and he now successfully logs in.
+
+
+ 
 
 
 

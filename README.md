@@ -80,6 +80,10 @@ I now opened my Active Directory on `Desktop1` on which I am signed in as the he
 [Insert pic]
 
 On `Desktop2`, I tried loggin in as `John` and it was succesful.
+I went back on `Desktop1`, opened AD Users and Computers then went into the `HR` OU and clicked on John > Attribute Error. I checked on this to see when was the last time the user logged in.
+[insert pic]
+
+# Common Active Directory Issues
 
 
 

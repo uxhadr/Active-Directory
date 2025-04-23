@@ -57,11 +57,31 @@ I then went into my Windows Server and opened AD USers and Computers to confirm 
 Next I opened `Desktop 1` and instead of signing in as the Administrator, I now signed in using the helpdesk account that I created earlier in the lab.
 
 # Group Policy
-I started by creating a new Windows 10 VM on virtualbox.
 I logged into the helpdesk account and opened AD Users and Computers. I right-cllicked on my doamin name > New > Organizational Unit. 
 For the name I put in `HR`.
 I right-clicked on Users > New > User. I named my new User `John` and created a new password for him. I then cliked on John's name and moved him into the HR folder/OU.
 Next I created a New OU and named it `IT` then I moved the helpdedk into the IT Organizational Unit.
+
+I opened Group Policy Management and checked my `Account Policies/Account Lockout Policy` and saw that my account lockout threshold was 0 invalid login attempts, which is a problem 
+because this means that if someone kept trying to login, they would have unlimited attempts of guessing my password.
+[inset pic of GPO]
+
+To change this I right-clicked on `Default Domain Policy` > Edit > Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies.
+I then open Account Lockout Policy, then clicked on Accoutn lockout threshold policy and checked the `Define policy setting` and set it to 4 invalid logon attempts and to reset account lockout after 30 minutes.
+I also changed my Max password age to 90 days. I then went back to my Group Policy Management to see if the changes applied.
+[inset pic of GPO]
+
+I started by creating a new Windows 10 VM on virtualbox. After it was done setting up I named it `Desktop2`. I enalbed the admin account on this computer too and delted the other user account.
+I gave `Destop2` a static ip and connected it to my window's server DNS. Then changed the virtula box's network settings to `Host only Adapter`.
+[insert ips]
+I then added it to my domain of `ADLabs.com`
+
+I now opened my Active Directory on `Desktop1` on which I am signed in as the helpdesk which is an admin account and saw that `Desktop2` shows up under computers.
+[Insert pic]
+
+On `Desktop2`, I tried loggin in as `John` and it was succesful.
+
+
 
 
 

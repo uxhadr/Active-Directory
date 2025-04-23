@@ -95,7 +95,32 @@ Since I set the lockout policy to 4 attempts. I intentionally tried to lock John
 This scenario assumes that John calls the helpdesk and now as the helpdesk we have to help him log back in. So on my helpdesk account I opened AD Users and Computers. Clicked on his OU which is `HR`. Then double-clicked on `John` > Account > Unlock account > OK. 
 Now the helpdesk asks John to try and log in again and he now successfully logs in.
 
+Inside the helpdesk's Acitve Directory, I clicked on `Computers` and deleted the `Desktop2` computer. I then went on Desktop1 and tried to sign in and it gave me an error mesage.
+[insert pic]
+To add it back to the Domain, I logged into `Desktop2` as a localuser, then added it to a workgroup, the added it back to the ADLOabs.com domain then restarted the computer.
+I went back into the `helpdesk` Active Directry and now `Desktop2` was back on the domain as it showed up under Computers.
 
+# Security Groups, Map Drives, Personal Drives, Map Letter
+I opened server manager on the `helpdesk`account. Then clicked on `File and Storage Services` > Shares > Right-click on the blank space > New Share > Quick > Next > Next.
+[insert pic - Name-HR, click oln select by volume]..
+
+For the Share Name, I named it `HR` then hit Next > Next > Next > Create.
+
+I then created another one but this time I named it `Personal`.
+ I opened `C:` on file explorer and saw the two shared drives that I just created.
+ [insert pic]
+
+ I went back to AD Users and Computers. I right-cllicked on Users > Group. I named the Group `HR` and for the group type I selected `Security`.
+ I opened up the HR Security Group, and went ot the `Managed By` taba and for the naeme I added \helpdesk.
+ [insert pic]
+ I then created another security group and named it `Personal`
+ I opened up the shared drives' propersties, clikcked on Sharing,and copied their network paths. I then pasted the paths into the description of the Security groups respectivley in AD Users and computers.
+ [insert pic of one example.- After network path,put [shared folder]]
+
+ I then opened up the security groups and went to the `Members` tab and added the user `John` into them.
+ To confirm that they're added, I opened up the HR OU and clicked on John's name, then clicked on `Member of` and HR and Personal showed up.
+ [insert pic]
+ 
  
 
 

@@ -154,8 +154,13 @@ On John's computer, I logged in and typed net user on the Command Prompt and I w
 [insert pic]
 Another way to see their shared drives, is on the `helpdesk` account I opened the Registry Editor > File > Connect Network Registry > `Typed in desktop2`.
 I got an error that it was Unable to connect to Desktop2. Make sure that this computer is on the network, has remote administration enabled.
-I opened up `Services` on Desktop2 and ran it as an administrator, and clicked on Remote Registry Properties
-> Start
+I opened up `Services` on Desktop2 and ran it as an administrator, and clicked on Remote Registry Properties > Start Type: Automatic > Start >OK.
+I opened the registry enter on the helpdesk account agian and this type it worked and I was able to access desktop 2.
+I clicked on `Desktop2` > HKEY_USERS > s-1-5-21-..... > Network > Z. I was able to view that the driver is mapped with the Z drive.
+[inset pic]
+
+
+https://gpem.luc.edu/portal/program?name=highereducationmed
 
 
 

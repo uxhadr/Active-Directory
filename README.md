@@ -1,13 +1,13 @@
 # Active-Directory
 
-# Installing Virtulabox and Server 2022
-I downloaded virtualbox.
-Next I went to Microsoft Evaluation website and downloaded Windows Server 2022 ISO.
-Once it was downloaded and setup, I hit start. 
-For the Windows Setup I chose the Desktop Experience.
+# Installing VirtualBox and Server 2022
+I downloaded VirtualBox.
+Next, I went to the Microsoft Evaluation website and downloaded Windows Server 2022 ISO.
+Once it was downloaded and set up, I hit start. 
+For the Windows Setup, I chose the Desktop Experience.
 
 # Installing Active Directory
-I started by renaming my server's name to: Server2022. 
+I started by renaming my server's name to Server2022. 
 ![image](https://github.com/user-attachments/assets/afd670d5-8e86-42fe-9b37-6e99ff7ad28c)
 I opened Server Manager. I hit Manage > Add Roles and Features > Next > Role-based >  Next > Next.
 Select Active Directory Domain Services > Add Features > Next > Next > Install
@@ -101,8 +101,8 @@ To add it back to the Domain, I logged into `Desktop2` as a localuser, then adde
 I went back into the `helpdesk` Active Directry and now `Desktop2` was back on the domain as it showed up under Computers.
 
 # Security Groups, Map Drives, Personal Drives, Map Letter
-I opened server manager on the `helpdesk`account. Then clicked on `File and Storage Services` > Shares > Right-click on the blank space > New Share > Quick > Next > Next.
-[insert pic - Name-HR, click oln select by volume]..
+I opened Server Manager on the `helpdesk`account. Then clicked on `File and Storage Services` > Shares > Right-click on the blank space > New Share > Quick > Next > Next.
+[insert pic - Name-HR, click on select by volume]..
 
 For the Share Name, I named it `HR` then hit Next > Next > Next > Create.
 
@@ -122,21 +122,36 @@ I then created another one but this time I named it `Personal`.
  [insert pic]
 
  # Permissioning the folder: 
- 
- 
+ **Step 1:** I right-clicked the Personal folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.
+ **Step 2:**  I  removed the Users, then hit add and added helpdesk and personal, and checked Modify and then hit OK. 
+ **Step 3:**  I right-clicked the Personal folder again and hit Sharing > Share > Personal > Read and Write > Share.
 
+ For the HR Folder:
+  **Step 1:** I right-clicked the HR folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.
+ **Step 2:**  I  removed the Users, then hit add and added helpdesk and HR, and checked Modify and then hit OK. 
+ **Step 3:**  I right-clicked the HR folder again and hit Sharing > Share > HR > Read and Write > Share.
 
+I looked at the network path for the HR properties and it was `\\Server2022\hr`.
+To see if my permissions were setup correctly I opened `Desktop2` and logged in as John. I opened File explorer and typed int he network path: `\\Server2022\hr`and it worked.
+[insert pic]
+To map the drive I copied the network path, right-clicked on This PC > Map Network Drive, and then typed in the network path, checked `reconnect at sign in`, and hit finish.
+Now, when I click on This PC, the HR folder shows up.
+[inset pic].
 
+On my server, I opened Active Directory and clicked on the user John > Profile. ON the Home folder on the connect P To: I typed in the Network path of the Personal Folder\username, `\\Server2022\%Personal%` and hit apply.
+I signed in to John's account agian and clicked on `This PC`  and the personal folder was now showing  up.
+[insert pic]
 
-
-
-
-
-
-
-
-
-
+ # Remote Desktop
+ I logged into Jphn's account and opened file explorer, and right-clicked on `This PC` > Properties > Remote Settings > `Put in helpdesk credentials` > Checked Allow remote connections to this computer > Select Users > helpdesk > OK > Apply > OK.
+I now went into Desktop1 and logged in as helpdesk and opened remote desktop. I typed  `desktop2` as the computer name and hit Connect, and put in my helpdesk password.
+[if it doesn't't wor, sign in as john and on cmd run: ipconfig / flushdns]
+On Johns computer, I hit Yes for allow the RDP connection, and I was now logged in as helpdesk on John's computer. I was able to add new folders into John's computer.
+On the Users folder on `This PC` I clicked on JOhns name and then typed in\appdata and I was now able to delete and add new apps for him.
+I ended the RDP session and let John log in again. He could see the new folder on his Home page that I added for him.
+[Inset Pic]
+On John's compute, I logged in and typed net user on the Command Prompt and I was able to see their shared drives.
+[insert pic]
 
 
 

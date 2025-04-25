@@ -21,7 +21,7 @@ Next, I opened up AD Users and Computers. I clicked on view and selected Advance
 on `administrator` and then hit copy to create a help desk account with admin privileges. 
 ![image](https://github.com/user-attachments/assets/3aa09aad-7954-4d76-bbee-8e5408a698a8)
 To get more information about the account I just created, I used the command: `net user helpdesk /domain` . It showed me information like: 
-what group he is part of, when the passwod was last set, if he passwodeds ever expires, and their last logon.
+what group he is part of, when the password was last set, if he passwodeds ever expires, and their last logon.
 
 # Join PC to domain, RSAT Tool
 I went to the Microsoft page and downloaded a windows 10 ISO. I opened up the Windows 10 Setup once it was done downloading
@@ -145,13 +145,19 @@ I signed in to John's account agian and clicked on `This PC`  and the personal f
  # Remote Desktop
  I logged into Jphn's account and opened file explorer, and right-clicked on `This PC` > Properties > Remote Settings > `Put in helpdesk credentials` > Checked Allow remote connections to this computer > Select Users > helpdesk > OK > Apply > OK.
 I now went into Desktop1 and logged in as helpdesk and opened remote desktop. I typed  `desktop2` as the computer name and hit Connect, and put in my helpdesk password.
-[if it doesn't't wor, sign in as john and on cmd run: ipconfig / flushdns]
+[if it doesn't't work, sign in as john and on cmd run: ipconfig / flushdns]
 On Johns computer, I hit Yes for allow the RDP connection, and I was now logged in as helpdesk on John's computer. I was able to add new folders into John's computer.
 On the Users folder on `This PC` I clicked on JOhns name and then typed in\appdata and I was now able to delete and add new apps for him.
 I ended the RDP session and let John log in again. He could see the new folder on his Home page that I added for him.
 [Inset Pic]
 On John's computer, I logged in and typed net user on the Command Prompt and I was able to see their shared drives.
 [insert pic]
+Another way to see their shared drives, is on the `helpdesk` account I opened the Registry Editor > File > Connect Network Registry > `Typed in desktop2`.
+I got an error that it was Unable to connect to Desktop2. Make sure that this computer is on the network, has remote administration enabled.
+I opened up `Services` on Desktop2 and ran it as an administrator, and clicked on Remote Registry Properties
+> Start
+
+
 
 
 

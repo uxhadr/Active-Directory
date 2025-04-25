@@ -150,7 +150,7 @@ On Johns computer, I hit Yes for allow the RDP connection, and I was now logged 
 On the Users folder on `This PC` I clicked on JOhns name and then typed in\appdata and I was now able to delete and add new apps for him.
 I ended the RDP session and let John log in again. He could see the new folder on his Home page that I added for him.
 [Inset Pic]
-On John's compute, I logged in and typed net user on the Command Prompt and I was able to see their shared drives.
+On John's computer, I logged in and typed net user on the Command Prompt and I was able to see their shared drives.
 [insert pic]
 
 

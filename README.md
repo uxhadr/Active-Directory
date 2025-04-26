@@ -209,12 +209,19 @@ I opened up PDQ Deploy again and deployed Zoom onto `Desktop2`. I logged into de
 
 # Printer Setup, NTFS, Printer Cloud
 I opened up Server Manager > Manage > Add Roles & Features > Next > Next > Next > Print and Document Services > Add Features > Next > Next > Next > Next > Install.
-Back to Server Manager > Tools > Print Management > Print Servers > Right-click the blank space > Add Printer > Add a new printer using an existing port > Install a new driver > Next > HP Color LaserJet > Next > Uncheck Share this printer > Next > Nex.
+Back to Server Manager > Tools > Print Management > Print Servers > Right-click the blank space > Add Printer > Add a new printer using an existing port > Install a new driver > Next > HP Color LaserJet > Next > Uncheck Share this printer > Next > Next.
 Now the Printer showed up in my Print Management under Printers.
 [Insert Pic]
-From here start following along. <Part 12 (6:14)>
+From here, start following along. <Part 12 (6:14)>
 
 
+# Undersstanding Tickets Using Spiceworks, RDP Tools
+I went into my browser and looked up Spiceworks and then I went to start remote session and it gave me a code.
+I opened up `Desktop2` and removed the static ip so that it was connected to my internet. I set the Virtualbox network settings to `Bridged Adapter`, and in the advanced section I set `Allow` for the Promiscous mode.
+I then went to the website `join.zoho.com` and put in the session ID and a name.
+[insert pic]
+I hit join session > Download > Run > Join.
+I went back to spiceworks which was opened on the helpdesk account and I was now able to remotely access `Desktop2`.
 
 
 

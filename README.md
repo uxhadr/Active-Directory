@@ -222,6 +222,8 @@ I then went to the website `join.zoho.com` and put in the session ID and a name.
 [insert pic]
 I hit join session > Download > Run > Join.
 I went back to spiceworks which was opened on the helpdesk account and I was now able to remotely access `Desktop2`.
+I was able to open up the Command Prompt
+
 
 
 

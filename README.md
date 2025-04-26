@@ -181,8 +181,30 @@ That gave me the report of the Policies enforced on John's computer. I clicked o
 I took my Server of static IP to install the CD image. I took a screenshot of the static IP so that I won't forget it.
 On VirtualBox, I clicked on Devices and chose the option to Insert Guest Additions CD image. Once I was done on my server I clicked on this PC and the CD image was mounted there. This CD will allow me to share stuff from my VM.
 [Insert Pic]
+I opened my virtualbox settings for my Server2022 lab and clicked on Shared Folders > Add Share > Chose Downloads as the Path, created a new folder in `Downloads`, and named it ADLabs > Checked Auto-mount > OK.
+On the bottom right of my VirtualBox I right-clicked on the CD and hit remove disk from virtual drive. 
+I opened my web browser and downloaded `PDQ`, and `PDQ Inventory`, and saved it into the ADLabs Folder. I then grabbed the PDQ application and moved it to the desktop.
+I opened my Virtualbox network settings and selected Bridged Adapter. On my server I opened the control panel > View network status and tasks > change adapter settings > Righ-Click Ethernet > Rename > Obtain Ip address automatically > OK.
+I pinged 8.8.8.8 to verify that I was connected to the internet.
+
+I hit PDQ > Install. It required me to install .Net Framework 4.8 and then it finished installing. 
+I also finished the installation for the PDQ Inventory
+I opened PDQ and went to package Library and installed `Zoom Client`. 
+I went to Packages > Right-clicked Zoom Client > Deploy Once > Choose Targets > Active Directory > Computers > Server2022 > OK > Deploy Now. Zoom was now installed on my Server's Desktop.
+[Insert pic where you can see both zoom on desktop and PDQ]
+
+I finished installing the PDQ inventory. I opened it up and clicked on All computers > Right-clicked Desktop2 > Run Report > Shared Folders. That showed me all the folders that were mapped on it.
+I cliked on the Computer and it gave me all the information about Desktop2.
+[Insert pic]
+I clicked on Applications which showed me what applications they had installed on their PC.
 
 
+
+After this I went back into my settings and changed my server's Ip address back to static, and changed the Virtualbox network settings back to `Host-Only Adapter`.
+I pinged ADLabs.com to confirm that the static ip was working.
+[insert pic]
+
+# PDQ Inventory, Hardware Inventory, Applications
 
 
 

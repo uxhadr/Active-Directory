@@ -207,7 +207,12 @@ I also restarted `Desktop2` from the PDQ Inventory app on my server.
 I opened up PDQ Deploy again and deployed Zoom onto `Desktop2`. I logged into desktop2 to confirm that zoom was downloaded.]
 [insert pic]
 
-# PDQ Inventory, Hardware Inventory, Applications
+# Printer Setup, NTFS, Printer Cloud
+I opened up Server Manager > Manage > Add Roles & Features > Next > Next > Next > Print and Document Services > Add Features > Next > Next > Next > Next > Install.
+Back to Server Manager > Tools > Print Management > Print Servers > Right-click the blank space > Add Printer > Add a new printer using an existing port > Install a new driver > Next > HP Color LaserJet > Next > Uncheck Share this printer > Next > Nex.
+Now the Printer showed up in my Print Management under Printers.
+[Insert Pic]
+From here start following along.
 
 
 

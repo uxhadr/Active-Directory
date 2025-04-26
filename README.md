@@ -165,9 +165,17 @@ I was also able to use the chat fuction to chat with John and ask them what was 
 
 # Group Policy, Task Manager, Disable Logoff
 I tried using the following commands to see how they worked: `gpupdate /force` , and `gpresult /r`
-On the helpdesk computer, I opened Group Policy Managemnt and right-cliked on `Group Policy Object` > New. Then named it Task Manager.
-
-
+On the helpdesk computer, I opened Group Policy Managemnt and right-cliked on `Group Policy Object` > New. Then named it Task Manager and hit OK.
+`Task Manager` was now under GPO. I clicked on it and selected `Delegation` > Add. Typed in 'John` and then hit OK, then put read permission only.
+Right-clicked Task Manager > Edit > Policies > Administrative Temp. I played around with this and saw different things that I could add and remove from John's account like the : 'Task bar, Remove Task Manager, Remove Change Passowrd, Remove Logoff'.
+After I changed different settings I went back to Group Policy Management and grabbed `Task Manager` from GPO and dragged it into `HR` since our User John is a part of that OU.
+[insert pic]
+I right-clicked on `Task Manager` and hit enforce, and then on John's compuer I ran the command `gpupadate /force` to apply the new policies.
+I then ran the cmd: `gpresult /r` and saw that the Group Policy `Task Manager` was being applied.
+[Insert pic]
+I tried opening Task Manager as the user John but I wasn't able to. It was now blocked because of the `Task Manager` Group Policy
+To see the policies enforced on John's computer as the helpdesk, I opened Groujp Policy Management > Right-clicked GP Results > GP Resuslts Wizard > Next > Browse > Type : Desktop2 > Next > /John > Next > Next > Finish.
+That gave me the report of the Policies enforced on John's computer. I clicked on Details and it showed me even more information about all the policies setup on John's computer.
 
 
 

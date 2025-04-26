@@ -159,8 +159,13 @@ I opened the registry enter on the helpdesk account agian and this type it worke
 I clicked on `Desktop2` > HKEY_USERS > s-1-5-21-..... > Network > Z. I was able to view that the driver is mapped with the Z drive.
 [inset pic]
 
-Next, I opened remote assistance on desktop2 and clicked on Invite Someone to help you. On the helpdesk account, I opened Remote Assistance  and clicked on Use an invitaiton file > type in `\\desktop2\c$` > Users > John > Desktop > Invitation. I then put in the password that was showing up on John's Screen. Then on John's screen I clickd on Ues to allow helpdesk to see whatever is going on on your desktop.
+Next, I opened remote assistance on desktop2 and clicked on Invite Someone to help you. On the helpdesk account, I opened Remote Assistance  and clicked on Use an invitaiton file > type in `\\desktop2\c$` > Users > John > Desktop > Invitation. I then put in the password that was showing up on John's Screen. Then on John's screen I clickd on yes to allow helpdesk to see whatever is going on on your desktop. Now I was able to see John's desktop from the helpdesk computer.
 [insert pic of both screens]
+I was also able to use the chat fuction to chat with John and ask them what was the issue.
+
+# Group Policy, Task Manager, Disable Logoff
+I tried using the following commands to see how they worked: `gpupdate /force` , and `gpresult /r`
+On the helpdesk computer, I opened Group Policy Managemnt and right-cliked on `Group Policy Object` > New. Then named it Task Manager.
 
 
 

@@ -230,7 +230,7 @@ I opened up server manager and created a new user named `Scott`. Im going to act
 I right-clicked on my domain name > Delegate Control > Next > Add > Typed in `Scott` > Next > Reset Password > Next > Finish.
 I logged in as scott and opened AD Users and Computers and opened the `HR` OU. I right clicked on the user John > Properties. The only thing Scott was able to do was reset John's password. All the other options were greyed out.
 [insert pic]
-saw that the only thing he was able to do is reset p.asswords
+saw that the only thing he was able to do was reset passwords.
 
 
 

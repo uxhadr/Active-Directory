@@ -203,9 +203,11 @@ I clicked on Applications which showed me what applications they had installed o
 After this I went back into my settings and changed my server's Ip address back to static, and changed the Virtualbox network settings back to `Host-Only Adapter`.
 I pinged ADLabs.com to confirm that the static ip was working.
 [insert pic]
+I also restarted `Desktop2` from the PDQ Inventory app on my server.
+I opened up PDQ Deploy again and deployed Zoom onto `Desktop2`. I logged into desktop2 to confirm that zoom was downloaded.]
+[insert pic]
 
 # PDQ Inventory, Hardware Inventory, Applications
-
 
 
 

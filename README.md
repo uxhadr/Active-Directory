@@ -177,6 +177,15 @@ I tried opening Task Manager as the user John but I wasn't able to. It was now b
 To see the policies enforced on John's computer as the helpdesk, I opened Groujp Policy Management > Right-clicked GP Results > GP Resuslts Wizard > Next > Browse > Type : Desktop2 > Next > /John > Next > Next > Finish.
 That gave me the report of the Policies enforced on John's computer. I clicked on Details and it showed me even more information about all the policies setup on John's computer.
 
+# Installing and Deploying PDQ, Software Packages
+I took my Server of static IP to install the CD image. I took a screenshot of the static IP so that I won't forget it.
+On VirtualBox, I clicked on Devices and chose the option to Insert Guest Additions CD image. Once I was done on my server I clicked on this PC and the CD image was mounted there. This CD will allow me to share stuff from my VM.
+[Insert Pic]
+
+
+
+
+
 
 
 

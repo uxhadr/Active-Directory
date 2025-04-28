@@ -32,26 +32,27 @@ I then selected my Windows10 ISO file for the start-up disk. I selected I don't 
 I chose to make the IP of my Server a static IP
 I opened  up the control panel > View network status and tasks > Change adapter settigns > Ethernet > Properties > TCP/IPv4 > Use the following aIP addresses
 ![image](https://github.com/user-attachments/assets/77525dda-b523-4b57-9d71-573b66f9342b)
-Next I clicked on the Network settings of my VirtualBox, and folr the `Attached tp:` I changed it from `NAT` to `Host-only Adapter`
+Next, I clicked on the Network settings of my VirtualBox, and for the `Attached to:` I changed it from `NAT` to `Host-only Adapter`
 
-Next I wnet back to my Windows 10 computer. Once it was done setting up, I opened File Explorer and right-clicked on `This PC` > Manage > Local Users and Groups > Users.
-I right-clicked on Adminstrator > Properties. I checdked Password never expires and unchecked all the other boxes,and hit OK.
-I I right-clicked on Adminstrator > Set Password. 
-I created a password and then signed out, then logged in as the Adminstrator.
-Once logged in, I opened `Computer Mangement` and deleted the `User`account so that I now only had one account on the PC.
-I renamed the computer to : Desktop 1.
+Next, I went back to my Windows 10 computer. Once it was done setting up, I opened File Explorer and right-clicked on `This PC` > Manage > Local Users and Groups > Users.
+I right-clicked on Administrator> Properties, checked Password never expires, unchecked all the other boxes,and hit OK.
+I right-clicked on Administrator> Set Password. 
+I created a password, signed out, and logged in as the Administrator.
+Once logged in, I opened `Computer Mangement` and deleted the `User` account so that I now only had one account on the PC.
+I renamed the computer to: Desktop 1.
 I opened the Settings and went to `Apps & features` > Optional features > Add a feature > RSAT Tools: (Active Directory Certificate Service Tools,  AD Domain Services,
 DHCP Server Tools, DNS Server Tools, Group Policy, Remote Desktop, Server Manager > Install.
-RSAT Tools will give me the ability to Active Directory Users and Services on a Windows 10 desktop.
-[Inset pictur of RSAT Tools installed]
-I downloaded google chrome and teamviewer.
-I opened my server and ran the cmd `ipconfig` to see my ip address. I then tried pinging my server's ip from `Desktop 1` but it was unsuccesful since they're not  in the same subnet or domain.
-[inset pic of unsuccesful ping`
+RSAT Tools will give me the ability to manage Active Directory Users and Services on a Windows 10 desktop.
+![image](https://github.com/user-attachments/assets/93899a4e-3815-43b6-91ba-d79260c1730e)
+I opened my server and ran the cmd `ipconfig` to see my IP address. I then tried pinging my server's ip from `Desktop 1` but it was unsuccessful since they're not  in the same subnet or domain.
+![image](https://github.com/user-attachments/assets/06821cac-ad7b-4a2d-9d2b-2394c5b59006)
+
+****
 I opened the control panel on `Desktop 1`and gave it a static ip that's in the same subnet as the server. 
 I clicked on the Network settings of my VirtualBox, and folr the `Attached tp:` I changed it from `NAT` to `Host-only Adapter`
-I tried pinging my server agian and it was now succesful.
+I tried pinging my server again, and it was now successful.
 [insert successful ping]
-I added `Desktop 1` to my domain `ADLabs.com`- I opened file explored and right-clicked on `This PC` > Properties > Change Settings > Change > Domain. 
+I added `Desktop 1` to my domain `ADLabs.com`- I opened File Explorer and right-clicked on `This PC` > Properties > Change Settings > Change > Domain. 
 I then went into my Windows Server and opened AD USers and Computers to confirm that `Desktop 1` joined the domain.
 [insert pic]
 Next I opened `Desktop 1` and instead of signing in as the Administrator, I now signed in using the helpdesk account that I created earlier in the lab.

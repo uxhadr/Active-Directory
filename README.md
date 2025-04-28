@@ -47,14 +47,41 @@ RSAT Tools will give me the ability to manage Active Directory Users and Service
 I opened my server and ran the cmd `ipconfig` to see my IP address. I then tried pinging my server's ip from `Desktop 1` but it was unsuccessful since they're not  in the same subnet or domain.
 ![image](https://github.com/user-attachments/assets/06821cac-ad7b-4a2d-9d2b-2394c5b59006)
 
-****
-I opened the control panel on `Desktop 1`and gave it a static ip that's in the same subnet as the server. 
+I opened the control panel on `Desktop1`and gave it a static ip that's in the same subnet as the server. 
 I clicked on the Network settings of my VirtualBox, and folr the `Attached tp:` I changed it from `NAT` to `Host-only Adapter`
-I tried pinging my server again, and it was now successful.
-[insert successful ping]
-I added `Desktop 1` to my domain `ADLabs.com`- I opened File Explorer and right-clicked on `This PC` > Properties > Change Settings > Change > Domain. 
+At first, pinging the ip did not work, so I followed the following steps:
+On Desktop1, open Windows Defender Firewall.
+Go to Advanced settings > Inbound Rules.
+Find and enable the rule named File and Printer Sharing (Echo Request - ICMPv4-In).
+I tried pinging desktop1 from my server again, and it was now successful.
+![image](https://github.com/user-attachments/assets/67117df2-55b8-4e02-ac7f-1c7a6cc54592)
+
+I added `Desktop 1` to my domain `ADLabs.com`- Open System Properties
+
+Press Windows + R, type sysdm.cpl, and press Enter
+or
+
+Right-click This PC on the desktop or in File Explorer, select Properties, then click Advanced system settings on the right.
+
+Change Computer Name/Domain
+
+In the System Properties window, go to the Computer Name tab.
+
+Click the Change... button.
+
+Select Domain Membership
+
+Under Member of, select Domain:
+
+Enter your domain name (e.g., ADLabs.com).
+
+Enter Domain Credentials
+
+When prompted, enter the username and password of a domain account that has permission to join computers to the domain (typically a domain admin or a user with join rights).
+
 I then went into my Windows Server and opened AD USers and Computers to confirm that `Desktop 1` joined the domain.
-[insert pic]
+![image](https://github.com/user-attachments/assets/d656a0e4-bf60-4b44-8a60-9239944090c2)
+
 Next I opened `Desktop 1` and instead of signing in as the Administrator, I now signed in using the helpdesk account that I created earlier in the lab.
 
 # Group Policy

@@ -102,10 +102,11 @@ I then opened Account Lockout Policy, clicked on Accoutn lockout threshold polic
 I also changed the maximum password age to 90 days. I then went back to my Group Policy Management to see if the changes applied.
 ![image](https://github.com/user-attachments/assets/751aeff7-9630-41d1-8ab6-bfe64d54f41a)
 
-[endelea]
 I created a new Windows 10 VM on virtualbox. After it was done setting up I named it `Desktop2`. I enalbed the admin account on this computer too and delted the other user account.
+
 I gave `Destop2` a static ip and connected it to my window's server DNS. Then changed the virtula box's network settings to `Host only Adapter`.
-[insert ips]
+![image](https://github.com/user-attachments/assets/f958576a-37bb-4efa-8aea-fcb37e4577b9)
+
 I then added it to my domain of `ADLabs.com`
 
 I now opened my Active Directory on `Desktop1` on which I am signed in as the helpdesk which is an admin account and saw that `Desktop2` shows up under computers.

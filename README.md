@@ -92,16 +92,18 @@ Next I created a New OU and named it `IT` then I moved the helpdedk into the IT 
 
 *********************************************
 # Group Policy
-I opened Group Policy Management and checked my `Account Policies/Account Lockout Policy` and saw that my account lockout threshold was 0 invalid login attempts, which is a problem 
-because this means that if someone kept trying to login, they would have unlimited attempts of guessing my password.
-[inset pic of GPO]
+To view my Account Policies, I opened Group Policy Management > Domains > (Mydomain.com) > Default DOmain Policy > Settings.
+I saw that users have unlimited attempts to input a password which is a security risk as it allows for a bruteforce attempt to occur. 
+![image](https://github.com/user-attachments/assets/a5aac827-c287-4664-9568-ab3946bd163d)
 
-To change this I right-clicked on `Default Domain Policy` > Edit > Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies.
-I then open Account Lockout Policy, then clicked on Accoutn lockout threshold policy and checked the `Define policy setting` and set it to 4 invalid logon attempts and to reset account lockout after 30 minutes.
-I also changed my Max password age to 90 days. I then went back to my Group Policy Management to see if the changes applied.
-[inset pic of GPO]
+To change this, I right-clicked on `Default Domain Policy` > Edit > Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies.
 
-I started by creating a new Windows 10 VM on virtualbox. After it was done setting up I named it `Desktop2`. I enalbed the admin account on this computer too and delted the other user account.
+I then opened Account Lockout Policy, clicked on Accoutn lockout threshold policy, checked the `Define policy setting`, set it to 4 invalid logon attempts, and reset account lockout after 30 minutes.
+I also changed the maximum password age to 90 days. I then went back to my Group Policy Management to see if the changes applied.
+![image](https://github.com/user-attachments/assets/751aeff7-9630-41d1-8ab6-bfe64d54f41a)
+
+[endelea]
+I created a new Windows 10 VM on virtualbox. After it was done setting up I named it `Desktop2`. I enalbed the admin account on this computer too and delted the other user account.
 I gave `Destop2` a static ip and connected it to my window's server DNS. Then changed the virtula box's network settings to `Host only Adapter`.
 [insert ips]
 I then added it to my domain of `ADLabs.com`

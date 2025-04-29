@@ -98,7 +98,7 @@ I saw that users have unlimited attempts to input a password which is a security
 
 To change this, I right-clicked on `Default Domain Policy` > Edit > Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies.
 
-I then opened Account Lockout Policy, clicked on Accoutn lockout threshold policy, checked the `Define policy setting`, set it to 4 invalid logon attempts, and reset account lockout after 30 minutes.
+I then opened Account Lockout Policy, clicked on Account lockout threshold policy, checked the `Define policy setting`, set it to 4 invalid logon attempts, and reset account lockout after 30 minutes.
 I also changed the maximum password age to 90 days. I then went back to my Group Policy Management to see if the changes applied.
 ![image](https://github.com/user-attachments/assets/751aeff7-9630-41d1-8ab6-bfe64d54f41a)
 
@@ -110,28 +110,32 @@ I gave `Destop2` a static ip and connected it to my window's server DNS. Then ch
 I then added it to my domain of `ADLabs.com`
 
 I now opened my Active Directory on `Desktop1` on which I am signed in as the helpdesk which is an admin account and saw that `Desktop2` shows up under computers.
-[Insert pic]
+![image](https://github.com/user-attachments/assets/20d581a1-771a-457d-be8f-a41427ee878b)
 
-On `Desktop2`, I tried loggin in as `John` and it was succesful.
-I went back on `Desktop1`, opened AD Users and Computers then went into the `HR` OU and clicked on John > Attribute Error. I checked on this to see when was the last time the user logged in.
-[insert pic]
+On `Desktop2`, I tried logging in as `John` and it was successful.
+I went back on `Desktop1`, opened AD Users and Computers, I enable Advanced features view, then went into the `HR` OU and clicked on John > Attribute Error. I checked on this to see when was the last time the user last logged in.
+![image](https://github.com/user-attachments/assets/a0faad53-3dad-4bf8-9a68-ad94882d8783)
 
 # Common Active Directory Issues
-I logged into my `helpdesk` account and pinged John's computer using `-t` which sends a continuous ping.
-I ran the command prompt as an admin and ran the cmd `gpresult /r>c:\results.txt`
-This ran the command and put the findings in a text file called `results.txt` on my PC.
-[Insert]
+I logged into my `helpdesk` account and pinged John's computer using `-t`, which sends a continuous ping, which would help me know when John's computer gets back on the network.
+I opened the command prompt as an admin and ran the cmd `gpresult /r>c:\results.txt`
+This ran the command and put the findings in a text file called `results.txt` on my PC. 
+![image](https://github.com/user-attachments/assets/e6194f17-7af1-4ea3-bbe4-c3f902c80c0e)
 
 Since I set the lockout policy to 4 attempts. I intentionally tried to lock John out of his account my attempting the wrong password 4 times.
-[insert pic of locked out account]
+![image](https://github.com/user-attachments/assets/cbc2486b-2f2d-4fb8-a31b-5bd6bd21327a)
 
-This scenario assumes that John calls the helpdesk and now as the helpdesk we have to help him log back in. So on my helpdesk account I opened AD Users and Computers. Clicked on his OU which is `HR`. Then double-clicked on `John` > Account > Unlock account > OK. 
+ This scenario assumes that John calls the helpdesk, and now, as the helpdesk, we have to help him log back in. So, on my helpdesk account,t I opened AD Users and Computers. Clicked on his OU which is `HR`. Then double-clicked on `John` > Account > Unlock account > OK. 
+ ![image](https://github.com/user-attachments/assets/ddeeadb2-72ab-4f0a-b101-503329297c7b)
 Now the helpdesk asks John to try and log in again and he now successfully logs in.
 
-Inside the helpdesk's Acitve Directory, I clicked on `Computers` and deleted the `Desktop2` computer. I then went on Desktop1 and tried to sign in and it gave me an error mesage.
-[insert pic]
+Inside the helpdesk's Active Directory, I clicked on `Computers` and deleted the `Desktop2` computer. I then went on Desktop2 and tried to sign in and it gave me an error mesage.
+![image](https://github.com/user-attachments/assets/f23f8c15-39d3-432b-a0f2-8ed3b0b0e69d)
+
 To add it back to the Domain, I logged into `Desktop2` as a localuser, then added it to a workgroup, the added it back to the ADLOabs.com domain then restarted the computer.
 I went back into the `helpdesk` Active Directry and now `Desktop2` was back on the domain as it showed up under Computers.
+
+###****&&&*^*^^(^%&%^%&$%$#%$$#^$%^%$%&^%*(^()^^^*&*^
 
 # Security Groups, Map Drives, Personal Drives, Map Letter
 I opened Server Manager on the `helpdesk`account. Then clicked on `File and Storage Services` > Shares > Right-click on the blank space > New Share > Quick > Next > Next.

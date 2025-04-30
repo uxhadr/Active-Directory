@@ -90,7 +90,6 @@ For the name I put in `HR`.
 I right-clicked on Users > New > User. I named my new User `John` and created a new password for him. I then cliked on John's name and moved him into the HR folder/OU.
 Next I created a New OU and named it `IT` then I moved the helpdedk into the IT Organizational Unit.
 
-*********************************************
 # Group Policy
 To view my Account Policies, I opened Group Policy Management > Domains > (Mydomain.com) > Default DOmain Policy > Settings.
 I saw that users have unlimited attempts to input a password which is a security risk as it allows for a bruteforce attempt to occur. 
@@ -135,28 +134,29 @@ Inside the helpdesk's Active Directory, I clicked on `Computers` and deleted the
 To add it back to the Domain, I logged into `Desktop2` as a localuser, then added it to a workgroup, the added it back to the ADLOabs.com domain then restarted the computer.
 I went back into the `helpdesk` Active Directry and now `Desktop2` was back on the domain as it showed up under Computers.
 
-###****&&&*^*^^(^%&%^%&$%$#%$$#^$%^%$%&^%*(^()^^^*&*^
 
 # Security Groups, Map Drives, Personal Drives, Map Letter
-I opened Server Manager on the `helpdesk`account. Then clicked on `File and Storage Services` > Shares > Right-click on the blank space > New Share > Quick > Next > Next.
-[insert pic - Name-HR, click on select by volume]..
+I opened Server Manager, then clicked on `File and Storage Services` > Shares > Right-click on the blank space > New Share > Quick > Next > Select by volume: C: > Next > `Name it HER` > Next > Next > Next > Create.
+![image](https://github.com/user-attachments/assets/643a2fe5-584b-45e4-afe4-ef5578ff7bc6)
 
-For the Share Name, I named it `HR` then hit Next > Next > Next > Create.
+I then created another one named  `Personal`.
+ I opened `C:` > Shares on file explorer and saw the two shared drives that I just created.
+![image](https://github.com/user-attachments/assets/5b0f3ffd-dccd-4b91-9279-de1fadaad5d5)
 
-I then created another one but this time I named it `Personal`.
- I opened `C:` on file explorer and saw the two shared drives that I just created.
- [insert pic]
+ I went back to AD Users and Computers. I right-clicked on Users > New > Group. 
+I named the Group `HR` and for the group type I selected `Security`.
+ I opened up the HR Security Group, and went ot the `Managed By` tab and for the name I added \helpdesk.
+![image](https://github.com/user-attachments/assets/5c0a82e6-5a87-4062-9212-4fa76cf54410)
 
- I went back to AD Users and Computers. I right-cllicked on Users > Group. I named the Group `HR` and for the group type I selected `Security`.
- I opened up the HR Security Group, and went ot the `Managed By` taba and for the naeme I added \helpdesk.
- [insert pic]
  I then created another security group and named it `Personal`
- I opened up the shared drives' propersties, clikcked on Sharing,and copied their network paths. I then pasted the paths into the description of the Security groups respectivley in AD Users and computers.
- [insert pic of one example.- After network path,put [shared folder]]
+ I opened up the shared drives' properties, clicked on Sharing, and copied their network paths. I then pasted the paths into the description of the Security groups respectivley in AD Users and computers.
+![image](https://github.com/user-attachments/assets/8fde7482-1ec0-4aed-ba69-a83c99f3e0a3)
 
- I then opened up the security groups and went to the `Members` tab and added the user `John` into them.
- To confirm that they're added, I opened up the HR OU and clicked on John's name, then clicked on `Member of` and HR and Personal showed up.
- [insert pic]
+
+I then opened up the security groups and went to the `Members` tab and added the user `John` into them.
+To confirm that they're added, I opened up the HR OU and clicked on John's name, then clicked on `Member of` and HR and Personal showed up.
+![image](https://github.com/user-attachments/assets/537cf90c-7529-4c4f-af30-b24a0611a730)
+
 
  # Permissioning the folder: 
  **Step 1:** I right-clicked the Personal folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.

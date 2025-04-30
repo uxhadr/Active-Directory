@@ -159,28 +159,34 @@ To confirm that they're added, I opened up the HR OU and clicked on John's name,
 
 
  # Permissioning the folder: 
- **Step 1:** I right-clicked the Personal folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.
- **Step 2:**  I  removed the Users, then hit add and added helpdesk and personal, and checked Modify and then hit OK. 
- **Step 3:**  I right-clicked the Personal folder again and hit Sharing > Share > Personal > Read and Write > Share.
+ **Step 1:** I right-clicked the Personal share folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.
+ **Step 2:**  I  removed the Users, then hit add and added helpdesk and personal, and checked Modify, and then hit OK. 
+ **Step 3:**  I right-clicked the Personal folder > Properties > Sharing > Share > Personal > Read and Write > Share.
 
  For the HR Folder:
-  **Step 1:** I right-clicked the HR folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.
- **Step 2:**  I  removed the Users, then hit add and added helpdesk and HR, and checked Modify and then hit OK. 
+  **Step 1:** I right-clicked the HR share folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.
+ **Step 2:**  I  removed the Users, then added helpdesk and HR, and checked Modify and then hit OK. 
  **Step 3:**  I right-clicked the HR folder again and hit Sharing > Share > HR > Read and Write > Share.
 
 I looked at the network path for the HR properties and it was `\\Server2022\hr`.
-To see if my permissions were setup correctly I opened `Desktop2` and logged in as John. I opened File explorer and typed int he network path: `\\Server2022\hr`and it worked.
-[insert pic]
-To map the drive I copied the network path, right-clicked on This PC > Map Network Drive, and then typed in the network path, checked `reconnect at sign in`, and hit finish.
-Now, when I click on This PC, the HR folder shows up.
-[inset pic].
+To see if my permissions were set up correctly, I opened `Desktop2` and logged in as John. I opened File explorer and typed in the network path: `\\Server2022\hr`and it worked.
+![image](https://github.com/user-attachments/assets/db43b785-6dc1-4c43-9dd9-9dfbf81d7d13)
+![image](https://github.com/user-attachments/assets/abb73157-b057-4a9a-99ab-a400b04f90a5)
 
-On my server, I opened Active Directory and clicked on the user John > Profile. ON the Home folder on the connect P To: I typed in the Network path of the Personal Folder\username, `\\Server2022\%Personal%` and hit apply.
+To map the HR drive: I copied the network path, right-clicked on This PC > Map Network Drive > typed in the network path > checked `reconnect at sign in`, and hit finish.
+Now, when I click on This PC, the HR folder shows up.
+![image](https://github.com/user-attachments/assets/57696812-ea08-4bdc-9d00-d8178f3a261d)
+
+
+On my server, I opened Active Directory and clicked on the user John > Profile > Home folder >  connect > P: > To: > Type in the Network path of the Personal Folder\username, `\\Server2022\Personal\% username%` > Apply.
+
+
 I signed in to John's account agian and clicked on `This PC`  and the personal folder was now showing  up.
-[insert pic]
+![image](https://github.com/user-attachments/assets/5704546d-01ab-445c-804e-4a20e5752396)
+
 
  # Remote Desktop
- I logged into Jphn's account and opened file explorer, and right-clicked on `This PC` > Properties > Remote Settings > `Put in helpdesk credentials` > Checked Allow remote connections to this computer > Select Users > helpdesk > OK > Apply > OK.
+ I logged into John's account and opened file explorer, and right-clicked on `This PC` > Properties > Remote Settings > `Put in helpdesk credentials` > Checked Allow remote connections to this computer > Select Users > helpdesk > OK > Apply > OK.
 I now went into Desktop1 and logged in as helpdesk and opened remote desktop. I typed  `desktop2` as the computer name and hit Connect, and put in my helpdesk password.
 [if it doesn't't work, sign in as john and on cmd run: ipconfig / flushdns]
 On Johns computer, I hit Yes for allow the RDP connection, and I was now logged in as helpdesk on John's computer. I was able to add new folders into John's computer.

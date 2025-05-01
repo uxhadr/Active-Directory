@@ -188,6 +188,18 @@ I signed in to John's account agian and clicked on `This PC`  and the personal f
  # Remote Desktop
  I logged into John's account and opened file explorer, and right-clicked on `This PC` > Properties > Remote Settings > `Put in helpdesk credentials` > Checked Allow remote connections to this computer > Select Users > helpdesk > OK > Apply > OK.
 I now went into Desktop1 and logged in as helpdesk and opened remote desktop. I typed  `desktop2` as the computer name and hit Connect, and put in my helpdesk password.
+I kept getting the following error:
+![image](https://github.com/user-attachments/assets/3eabf0a7-8ca8-415d-ad2c-19967f5ee98b)
+I went to settings and allowed remote conections on this computer on the helpdesk's computer then tried again.
+ping -t help with troubleshooting the following:
+![image](https://github.com/user-attachments/assets/0ec7179d-014f-4d18-948a-6942a6b25def)
+I had to allow ICMP requests on the firewall on both desktops for the desktops to be able to ping each other using the cmd: `netsh advfirewall firewall add rule name="Allow ICMPv4-In" protocol=icmpv4:8,any dir=in action=allow`
+
+
+
+
+
+
 [if it doesn't't work, sign in as john and on cmd run: ipconfig / flushdns]
 On Johns computer, I hit Yes for allow the RDP connection, and I was now logged in as helpdesk on John's computer. I was able to add new folders into John's computer.
 On the Users folder on `This PC` I clicked on JOhns name and then typed in\appdata and I was now able to delete and add new apps for him.

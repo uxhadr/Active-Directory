@@ -194,26 +194,32 @@ I went to settings and allowed remote conections on this computer on the helpdes
 ping -t help with troubleshooting the following:
 ![image](https://github.com/user-attachments/assets/0ec7179d-014f-4d18-948a-6942a6b25def)
 I had to allow ICMP requests on the firewall on both desktops for the desktops to be able to ping each other using the cmd: `netsh advfirewall firewall add rule name="Allow ICMPv4-In" protocol=icmpv4:8,any dir=in action=allow`
+![image](https://github.com/user-attachments/assets/f9ba204d-8396-4813-8940-dbf9b5d37121)
 
+I was now able to remote by typing desktop2 on the rdp application.
+![image](https://github.com/user-attachments/assets/d3971d60-8164-4e7c-8db1-9ad7d396659c)
 
-
-
-
-
-[if it doesn't't work, sign in as john and on cmd run: ipconfig / flushdns]
 On Johns computer, I hit Yes for allow the RDP connection, and I was now logged in as helpdesk on John's computer. I was able to add new folders into John's computer.
-On the Users folder on `This PC` I clicked on JOhns name and then typed in\appdata and I was now able to delete and add new apps for him.
-I ended the RDP session and let John log in again. He could see the new folder on his Home page that I added for him.
-[Inset Pic]
-On John's computer, I logged in and typed net user on the Command Prompt and I was able to see their shared drives.
-[insert pic]
+![image](https://github.com/user-attachments/assets/691d396f-baea-4b8a-8e0e-d110846650f3)
+
+Now logged as the helpdesk accessing John's computer. I clicked on `This PC` > C: > Users > John > Continue > Desktop. 
+I was able to create new folders and delete folders for John. 
+I created a new called and called it `Test Folder` and moved it to his Desktop.
+I clicked on `This PC` > Users > John > and then typed in `\appdata` and I was now able to delete and add new apps for him.
+I ended the RDP session and let John log in again. John could see the new folder on his Home page that I added for him.
+![image](https://github.com/user-attachments/assets/31deb30f-e031-4c95-a29a-896cb7fd1f25)
+
+On John's computer, I logged in and typed `net use` on the Command Prompt, and I was able to see their shared drives.
+![image](https://github.com/user-attachments/assets/3b7b6438-c0d2-446c-ab1d-d8e08f2f1525)
+
 Another way to see their shared drives, is on the `helpdesk` account I opened the Registry Editor > File > Connect Network Registry > `Typed in desktop2`.
-I got an error that it was Unable to connect to Desktop2. Make sure that this computer is on the network, has remote administration enabled.
+I got an error that it was Unable to connect to Desktop2.` Make sure that this computer is on the network, has remote administration enabled.`
 I opened up `Services` on Desktop2 and ran it as an administrator, and clicked on Remote Registry Properties > Start Type: Automatic > Start >OK.
 I opened the registry enter on the helpdesk account agian and this type it worked and I was able to access desktop 2.
 I clicked on `Desktop2` > HKEY_USERS > s-1-5-21-..... > Network > Z. I was able to view that the driver is mapped with the Z drive.
-[inset pic]
+![image](https://github.com/user-attachments/assets/1b26da27-dbca-4b75-a15c-00d3fbeb0128)
 
+[[[[[[[Start from here]]]]]]]]]]]]]]]]]]]
 Next, I opened remote assistance on desktop2 and clicked on Invite Someone to help you. On the helpdesk account, I opened Remote Assistance  and clicked on Use an invitaiton file > type in `\\desktop2\c$` > Users > John > Desktop > Invitation. I then put in the password that was showing up on John's Screen. Then on John's screen I clickd on yes to allow helpdesk to see whatever is going on on your desktop. Now I was able to see John's desktop from the helpdesk computer.
 [insert pic of both screens]
 I was also able to use the chat fuction to chat with John and ask them what was the issue.

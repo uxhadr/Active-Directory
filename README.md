@@ -141,134 +141,155 @@ This project documents the process I followed to set up an Active Directory lab 
 18. Created another **OU** named `IT` and moved the **Helpdesk** user into it.
 
 
-# Group Policy
-To view my Account Policies, I opened Group Policy Management > Domains > (Mydomain.com) > Default DOmain Policy > Settings.
-I saw that users have unlimited attempts to input a password which is a security risk as it allows for a bruteforce attempt to occur. 
-![image](https://github.com/user-attachments/assets/a5aac827-c287-4664-9568-ab3946bd163d)
+## 🔐 Configuring Group Policy
 
-To change this, I right-clicked on `Default Domain Policy` > Edit > Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies.
+1. Opened **Group Policy Management** and navigated to:
+   `Domains > (Mydomain.com) > Default Domain Policy > Settings`.
 
-I then opened Account Lockout Policy, clicked on Account lockout threshold policy, checked the `Define policy setting`, set it to 4 invalid logon attempts, and reset account lockout after 30 minutes.
-I also changed the maximum password age to 90 days. I then went back to my Group Policy Management to see if the changes applied.
-![image](https://github.com/user-attachments/assets/751aeff7-9630-41d1-8ab6-bfe64d54f41a)
+2. Identified a security risk — users had unlimited login attempts, allowing brute force attacks.
+   ![Group Policy Settings](https://github.com/user-attachments/assets/a5aac827-c287-4664-9568-ab3946bd163d)
 
-I created a new Windows 10 VM on virtualbox. After it was done setting up I named it `Desktop2`. I enalbed the admin account on this computer too and delted the other user account.
+3. Edited the **Default Domain Policy**:
+   Right-clicked on `Default Domain Policy` > **Edit** > `Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies`.
 
-I gave `Destop2` a static ip and connected it to my window's server DNS. Then changed the virtula box's network settings to `Host only Adapter`.
-![image](https://github.com/user-attachments/assets/f958576a-37bb-4efa-8aea-fcb37e4577b9)
+4. Configured the **Account Lockout Policy**:
 
-I then added it to my domain of `ADLabs.com`
+   * Set **Account lockout threshold** to 4 invalid attempts.
+   * Set **Reset account lockout after** to 30 minutes.
+   * Set **Maximum password age** to 90 days.
 
-I now opened my Active Directory on `Desktop1` on which I am signed in as the helpdesk which is an admin account and saw that `Desktop2` shows up under computers.
-![image](https://github.com/user-attachments/assets/20d581a1-771a-457d-be8f-a41427ee878b)
+5. Verified the policy was applied in **Group Policy Management**.
+   ![Group Policy Applied](https://github.com/user-attachments/assets/751aeff7-9630-41d1-8ab6-bfe64d54f41a)
 
-On `Desktop2`, I tried logging in as `John` and it was successful.
-I went back on `Desktop1`, opened AD Users and Computers, I enable Advanced features view, then went into the `HR` OU and clicked on John > Attribute Error. I checked on this to see when was the last time the user last logged in.
-![image](https://github.com/user-attachments/assets/a0faad53-3dad-4bf8-9a68-ad94882d8783)
+---
 
-# Common Active Directory Issues
-I logged into my `helpdesk` account and pinged John's computer using `-t`, which sends a continuous ping, which would help me know when John's computer gets back on the network.
-I opened the command prompt as an admin and ran the cmd `gpresult /r>c:\results.txt`
-This ran the command and put the findings in a text file called `results.txt` on my PC. 
-![image](https://github.com/user-attachments/assets/e6194f17-7af1-4ea3-bbe4-c3f902c80c0e)
+## 💻 Setting Up a New VM and Domain
 
-Since I set the lockout policy to 4 attempts. I intentionally tried to lock John out of his account my attempting the wrong password 4 times.
-![image](https://github.com/user-attachments/assets/cbc2486b-2f2d-4fb8-a31b-5bd6bd21327a)
+1. Created a new **Windows 10 VM** named `Desktop2` in VirtualBox, enabling the admin account and deleting other user accounts.
 
- This scenario assumes that John calls the helpdesk, and now, as the helpdesk, we have to help him log back in. So, on my helpdesk account,t I opened AD Users and Computers. Clicked on his OU which is `HR`. Then double-clicked on `John` > Account > Unlock account > OK. 
- ![image](https://github.com/user-attachments/assets/ddeeadb2-72ab-4f0a-b101-503329297c7b)
-Now the helpdesk asks John to try and log in again and he now successfully logs in.
+2. Assigned a **static IP** to `Desktop2` and connected it to the server's DNS.
 
-Inside the helpdesk's Active Directory, I clicked on `Computers` and deleted the `Desktop2` computer. I then went on Desktop2 and tried to sign in and it gave me an error mesage.
-![image](https://github.com/user-attachments/assets/f23f8c15-39d3-432b-a0f2-8ed3b0b0e69d)
+3. Set VirtualBox network to **Host Only Adapter**.
+   ![Network Settings](https://github.com/user-attachments/assets/f958576a-37bb-4efa-8aea-fcb37e4577b9)
 
-To add it back to the Domain, I logged into `Desktop2` as a localuser, then added it to a workgroup, the added it back to the ADLOabs.com domain then restarted the computer.
-I went back into the `helpdesk` Active Directry and now `Desktop2` was back on the domain as it showed up under Computers.
+4. Added `Desktop2` to the **ADLabs.com domain**.
+
+5. On `Desktop1`, logged in as **Helpdesk** (admin account) and confirmed that `Desktop2` was listed under **Computers**.
+   ![Desktop2 in AD](https://github.com/user-attachments/assets/20d581a1-771a-457d-be8f-a41427ee878b)
+
+6. Tested login on `Desktop2` as **John**, which was successful.
+
+7. In **Active Directory Users and Computers**, I accessed the **HR OU**, clicked on **John**, and checked the **Attribute Error** to verify his last login time.
+   ![Attribute Error](https://github.com/user-attachments/assets/a0faad53-3dad-4bf8-9a68-ad94882d8783)
+
+---
+
+## 🛠️ Common Active Directory Issues
+
+1. Pinned `John`'s **PC** using **ping -t** to monitor when it comes back online.
+
+2. Ran **gpresult /r** command to generate a **results.txt** file for policy results.
+   ![Gpresult](https://github.com/user-attachments/assets/e6194f17-7af1-4ea3-bbe4-c3f902c80c0e)
+
+3. Intentionally locked **John** out by entering the wrong password 4 times to test the lockout policy.
+   ![Lockout](https://github.com/user-attachments/assets/cbc2486b-2f2d-4fb8-a31b-5bd6bd21327a)
+
+4. To unlock **John**'s account, I navigated to **AD Users and Computers**, went to the **HR OU**, and unlocked his account.
+   ![Unlock Account](https://github.com/user-attachments/assets/ddeeadb2-72ab-4f0a-b101-503329297c7b)
+
+5. Verified **John** could log back in successfully.
+
+6. Deleted **Desktop2** from the domain, logged in as **localuser**, rejoined it to the **ADLabs.com** domain, and restarted the PC.
+   ![Desktop2 Removed](https://github.com/user-attachments/assets/f23f8c15-39bb-4efa-8e7f-70d4508c081c)
+
+7. Rechecked **Active Directory** on the helpdesk account, confirming that `Desktop2` was successfully added back to the domain.
+
+---
+
+## 🗂️ Managing Security Groups and Network Drives
+
+1. In **Server Manager**, I created a new shared folder named **HR**:
+   `File and Storage Services > Shares > New Share > Quick > C: > Create`.
+   ![Create HR Share](https://github.com/user-attachments/assets/643a2fe5-584b-45e4-afe4-ef5578ff7bc6)
+
+2. Created a second shared folder called **Personal** and confirmed both appeared under **Shares** in **File Explorer**.
+   ![HR and Personal Shares](https://github.com/user-attachments/assets/5b0f3ffd-dccd-4b91-9279-de1fadaad5d5)
+
+3. Created **Security Groups** in Active Directory:
+
+   * Created `HR` group and added **Helpdesk** under **Managed By**.
+     ![HR Group](https://github.com/user-attachments/assets/5c0a82e6-5a87-4062-9212-4fa76cf54410)
+
+   * Created `Personal` group similarly.
+
+4. Pasted the shared folder paths into the **Security Groups** descriptions in **AD Users and Computers**.
+   ![Group Descriptions](https://github.com/user-attachments/assets/8fde7482-1ec0-4aed-ba69-a83c99f3e0a3)
+
+5. Added **John** to both groups by navigating to the **Members** tab in each group.
+   ![Add Members](https://github.com/user-attachments/assets/537cf90c-7529-4c4f-af30-b24a0611a730)
+
+---
+
+## 📁 Folder Permissions
+
+1. Configured **permissions** for the **Personal** folder:
+
+   * Disabled inheritance and adjusted permissions for **Helpdesk** and **Personal** groups.
+   * Set to **Modify**.
+   * Shared the folder with **Read/Write** permissions.
+
+2. Configured **permissions** for the **HR** folder in a similar manner.
+
+3. Verified permissions by logging into **Desktop2** as **John**, confirming access to the **HR** folder.
+   ![HR Folder Access](https://github.com/user-attachments/assets/db43b785-6dc1-4c43-9dd9-9dfbf81d7d13)
+
+4. Mapped the **HR** folder by copying the network path and selecting **Reconnect at sign-in**.
+   ![Mapped Drive](https://github.com/user-attachments/assets/57696812-ea08-4bdc-9d00-d8178f3a261d)
+
+5. Set up a **Personal Folder** for **John** in Active Directory under his **Profile > Home Folder** by mapping to `\\Server2022\Personal\%username%`.
+   ![Personal Folder](https://github.com/user-attachments/assets/5704546d-01ab-445c-804e-4a20e5752396)
+
+---
+
+Let me know if you'd like any adjustments!
 
 
-# Security Groups, Map Drives, Personal Drives, Map Letter
-I opened Server Manager, then clicked on `File and Storage Services` > Shares > Right-click on the blank space > New Share > Quick > Next > Select by volume: C: > Next > `Name it HER` > Next > Next > Next > Create.
-![image](https://github.com/user-attachments/assets/643a2fe5-584b-45e4-afe4-ef5578ff7bc6)
 
-I then created another one named  `Personal`.
- I opened `C:` > Shares on file explorer and saw the two shared drives that I just created.
-![image](https://github.com/user-attachments/assets/5b0f3ffd-dccd-4b91-9279-de1fadaad5d5)
+### Remote Desktop
 
- I went back to AD Users and Computers. I right-clicked on Users > New > Group. 
-I named the Group `HR` and for the group type I selected `Security`.
- I opened up the HR Security Group, and went ot the `Managed By` tab and for the name I added \helpdesk.
-![image](https://github.com/user-attachments/assets/5c0a82e6-5a87-4062-9212-4fa76cf54410)
+I logged into John's account and opened File Explorer. I right-clicked on **This PC** > **Properties** > **Remote Settings** > entered the **helpdesk** credentials > checked **Allow remote connections to this computer** > selected **Users** > added **helpdesk** > clicked **OK**, then **Apply** and **OK**.
 
- I then created another security group and named it `Personal`
- I opened up the shared drives' properties, clicked on Sharing, and copied their network paths. I then pasted the paths into the description of the Security groups respectivley in AD Users and computers.
-![image](https://github.com/user-attachments/assets/8fde7482-1ec0-4aed-ba69-a83c99f3e0a3)
-
-
-I then opened up the security groups and went to the `Members` tab and added the user `John` into them.
-To confirm that they're added, I opened up the HR OU and clicked on John's name, then clicked on `Member of` and HR and Personal showed up.
-![image](https://github.com/user-attachments/assets/537cf90c-7529-4c4f-af30-b24a0611a730)
-
-
- # Permissioning the folder: 
- **Step 1:** I right-clicked the Personal share folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.
- **Step 2:**  I  removed the Users, then hit add and added helpdesk and personal, and checked Modify, and then hit OK. 
- **Step 3:**  I right-clicked the Personal folder > Properties > Sharing > Share > Personal > Read and Write > Share.
-
- For the HR Folder:
-  **Step 1:** I right-clicked the HR share folder on the local PC and hit properties > Security > Advanced > Disable inheritance > Convert inherited permissions.
- **Step 2:**  I  removed the Users, then added helpdesk and HR, and checked Modify and then hit OK. 
- **Step 3:**  I right-clicked the HR folder again and hit Sharing > Share > HR > Read and Write > Share.
-
-I looked at the network path for the HR properties and it was `\\Server2022\hr`.
-To see if my permissions were set up correctly, I opened `Desktop2` and logged in as John. I opened File explorer and typed in the network path: `\\Server2022\hr`and it worked.
-![image](https://github.com/user-attachments/assets/db43b785-6dc1-4c43-9dd9-9dfbf81d7d13)
-![image](https://github.com/user-attachments/assets/abb73157-b057-4a9a-99ab-a400b04f90a5)
-
-To map the HR drive: I copied the network path, right-clicked on This PC > Map Network Drive > typed in the network path > checked `reconnect at sign in`, and hit finish.
-Now, when I click on This PC, the HR folder shows up.
-![image](https://github.com/user-attachments/assets/57696812-ea08-4bdc-9d00-d8178f3a261d)
-
-
-On my server, I opened Active Directory and clicked on the user John > Profile > Home folder >  connect > P: > To: > Type in the Network path of the Personal Folder\username, `\\Server2022\Personal\% username%` > Apply.
-
-
-I signed in to John's account agian and clicked on `This PC`  and the personal folder was now showing  up.
-![image](https://github.com/user-attachments/assets/5704546d-01ab-445c-804e-4a20e5752396)
-
-
- # Remote Desktop
- I logged into John's account and opened file explorer, and right-clicked on `This PC` > Properties > Remote Settings > `Put in helpdesk credentials` > Checked Allow remote connections to this computer > Select Users > helpdesk > OK > Apply > OK.
-I now went into Desktop1 and logged in as helpdesk and opened remote desktop. I typed  `desktop2` as the computer name and hit Connect, and put in my helpdesk password.
-I kept getting the following error:
+I then went to **Desktop1**, logged in as **helpdesk**, and opened **Remote Desktop**. I typed `desktop2` as the computer name and hit **Connect**, entering my helpdesk password. However, I received the following error:
 ![image](https://github.com/user-attachments/assets/3eabf0a7-8ca8-415d-ad2c-19967f5ee98b)
-I went to settings and allowed remote conections on this computer on the helpdesk's computer then tried again.
-ping -t help with troubleshooting the following:
+
+I proceeded to the settings and allowed remote connections on the **helpdesk** computer as well, then tried again.
+
+For troubleshooting, I pinged **desktop2** with the command `ping -t` to check connectivity:
 ![image](https://github.com/user-attachments/assets/0ec7179d-014f-4d18-948a-6942a6b25def)
-I had to allow ICMP requests on the firewall on both desktops for the desktops to be able to ping each other using the cmd: `netsh advfirewall firewall add rule name="Allow ICMPv4-In" protocol=icmpv4:8,any dir=in action=allow`
+
+To ensure both desktops could communicate, I enabled ICMP requests on the firewall with the following command:
+`netsh advfirewall firewall add rule name="Allow ICMPv4-In" protocol=icmpv4:8,any dir=in action=allow`
 ![image](https://github.com/user-attachments/assets/f9ba204d-8396-4813-8940-dbf9b5d37121)
 
-I was now able to remote by typing desktop2 on the rdp application.
+I was then able to connect by typing **desktop2** in the RDP application:
 ![image](https://github.com/user-attachments/assets/d3971d60-8164-4e7c-8db1-9ad7d396659c)
 
-On Johns computer, I hit Yes for allow the RDP connection, and I was now logged in as helpdesk on John's computer. I was able to add new folders into John's computer.
+On **John's** computer, I clicked **Yes** to allow the RDP connection and successfully logged into his computer as **helpdesk**. I was able to add new folders to **John's** desktop:
 ![image](https://github.com/user-attachments/assets/691d396f-baea-4b8a-8e0e-d110846650f3)
 
-Now logged as the helpdesk accessing John's computer. I clicked on `This PC` > C: > Users > John > Continue > Desktop. 
-I was able to create new folders and delete folders for John. 
-I created a new called and called it `Test Folder` and moved it to his Desktop.
-I clicked on `This PC` > Users > John > and then typed in `\appdata` and I was now able to delete and add new apps for him.
-I ended the RDP session and let John log in again. John could see the new folder on his Home page that I added for him.
+I accessed **John's** **C: > Users > John > Desktop** through RDP and created a folder named **Test Folder** and moved it to his desktop. I also navigated to **appdata** and added new apps for him:
+I ended the RDP session, and **John** logged in again, where he saw the new folder I added on his home page:
 ![image](https://github.com/user-attachments/assets/31deb30f-e031-4c95-a29a-896cb7fd1f25)
 
-On John's computer, I logged in and typed `net use` on the Command Prompt, and I was able to see their shared drives.
+On **John's** computer, I logged in and typed `net use` in the command prompt. This allowed me to see the shared drives:
 ![image](https://github.com/user-attachments/assets/3b7b6438-c0d2-446c-ab1d-d8e08f2f1525)
 
-Another way to see their shared drives, is on the `helpdesk` account I opened the Registry Editor > File > Connect Network Registry > `Typed in desktop2`.
-I got an error that it was Unable to connect to Desktop2.` Make sure that this computer is on the network, has remote administration enabled.`
-I opened up `Services` on Desktop2 and ran it as an administrator, and clicked on Remote Registry Properties > Start Type: Automatic > Start >OK.
-I opened the registry enter on the helpdesk account agian and this type it worked and I was able to access desktop 2.
-I clicked on `Desktop2` > HKEY_USERS > s-1-5-21-..... > Network > Z. I was able to view that the driver is mapped with the Z drive.
+Additionally, I accessed the **Registry Editor** on **helpdesk** by going to **File > Connect Network Registry**, typing **desktop2**. However, I got an error message stating it was unable to connect, and I should ensure that the computer was on the network and had remote administration enabled:
+I resolved this by opening **Services** on **Desktop2**, running it as an administrator, and setting **Remote Registry** to **Automatic** > clicked **Start** > **OK**.
+
+Finally, I connected to the **Desktop2** registry on **helpdesk** and was able to view the mapped Z drive under the registry key:
 ![image](https://github.com/user-attachments/assets/1b26da27-dbca-4b75-a15c-00d3fbeb0128)
+
 
 [[[[[[[Start from here]]]]]]]]]]]]]]]]]]]
 Next, I opened remote assistance on desktop2 and clicked on Invite Someone to help you. On the helpdesk account, I opened Remote Assistance  and clicked on Use an invitaiton file > type in `\\desktop2\c$` > Users > John > Desktop > Invitation. I then put in the password that was showing up on John's Screen. Then on John's screen I clickd on yes to allow helpdesk to see whatever is going on on your desktop. Now I was able to see John's desktop from the helpdesk computer.

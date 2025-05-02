@@ -1,94 +1,145 @@
-# Active-Directory
+# 🖥️ Active Directory Lab Setup
 
-# Installing VirtualBox and Server 2022
-I downloaded VirtualBox.
-Next, I went to the Microsoft Evaluation website and downloaded Windows Server 2022 ISO.
-Once it was downloaded and set up, I hit start. 
-For the Windows Setup, I chose the Desktop Experience.
+This project documents the process I followed to set up an Active Directory lab environment using VirtualBox and Windows Server 2022. The goal was to get hands-on practice with domain services, account management, and administrative tools.
 
-# Installing Active Directory
-I started by renaming my server's name to Server2022. 
-![image](https://github.com/user-attachments/assets/afd670d5-8e86-42fe-9b37-6e99ff7ad28c)
-I opened Server Manager. I hit Manage > Add Roles and Features > Next > Role-based >  Next > Next.
-Select Active Directory Domain Services > Add Features > Next > Next > Install
-Once it was done I clicked on `promote this server to a domain controller` > Add a new forest.
-For root domain, I named it: ADLabs then hit Next and created a password for it and then installed it.
-After it restarted, Server Manager opened up. I clicked on Tools and then `Active Directory Users and Computers`. Once it opened up, I pinned it to the task bar.
+---
 
-# Active Directory Account Creation
-I clicked on Tools and opened up `Active Directory Administrative Center`, I clicked on my domain name and then I enabled Recycle Bin.
-Next, I opened up AD Users and Computers. I clicked on view and selected Advanced Features. I opened up my donmain name and then clicked on users. I right-clicked 
-on `administrator` and then hit copy to create a help desk account with admin privileges. 
-![image](https://github.com/user-attachments/assets/3aa09aad-7954-4d76-bbee-8e5408a698a8)
-To get more information about the account I just created, I used the command: `net user helpdesk /domain` . It showed me information like: 
-what group he is part of, when the password was last set, if he passwodeds ever expires, and their last logon.
+## 📦 Installing VirtualBox and Server 2022
 
-# Join PC to domain, RSAT Tool
-I went to the Microsoft page and downloaded a windows 10 ISO. I opened up the Windows 10 Setup once it was done downloading
-![image](https://github.com/user-attachments/assets/8ed45424-e6dc-4711-9725-1c1f2682b7f5)
-I selected ISO file, and then hit next and saved it.
-Once it was downloaded, I opened up Virtualbox and hit New. I named it `Windows 10 Lab` > Next > 5 GB RAM > Next > Next > Install.
-I then selected my Windows10 ISO file for the start-up disk. I selected I don't have a product Key and chose Windows 10 Pro because I am trying to add this computer to a domain and you can't do that with Windows 10 Home.
-I chose to make the IP of my Server a static IP
-I opened  up the control panel > View network status and tasks > Change adapter settigns > Ethernet > Properties > TCP/IPv4 > Use the following aIP addresses
-![image](https://github.com/user-attachments/assets/77525dda-b523-4b57-9d71-573b66f9342b)
-Next, I clicked on the Network settings of my VirtualBox, and for the `Attached to:` I changed it from `NAT` to `Host-only Adapter`
+1. Downloaded and installed [VirtualBox](https://www.virtualbox.org/).
+2. Went to the [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/) and downloaded the **Windows Server 2022 ISO**.
+3. Set up a new VM in VirtualBox and attached the ISO.
+4. Launched the VM and selected **Desktop Experience** during Windows Setup.
 
-Next, I went back to my Windows 10 computer. Once it was done setting up, I opened File Explorer and right-clicked on `This PC` > Manage > Local Users and Groups > Users.
-I right-clicked on Administrator> Properties, checked Password never expires, unchecked all the other boxes,and hit OK.
-I right-clicked on Administrator> Set Password. 
-I created a password, signed out, and logged in as the Administrator.
-Once logged in, I opened `Computer Mangement` and deleted the `User` account so that I now only had one account on the PC.
-I renamed the computer to: Desktop 1.
-I opened the Settings and went to `Apps & features` > Optional features > Add a feature > RSAT Tools: (Active Directory Certificate Service Tools,  AD Domain Services,
-DHCP Server Tools, DNS Server Tools, Group Policy, Remote Desktop, Server Manager > Install.
-RSAT Tools will give me the ability to manage Active Directory Users and Services on a Windows 10 desktop.
-![image](https://github.com/user-attachments/assets/93899a4e-3815-43b6-91ba-d79260c1730e)
-I opened my server and ran the cmd `ipconfig` to see my IP address. I then tried pinging my server's ip from `Desktop 1` but it was unsuccessful since they're not  in the same subnet or domain.
-![image](https://github.com/user-attachments/assets/06821cac-ad7b-4a2d-9d2b-2394c5b59006)
+---
 
-I opened the control panel on `Desktop1`and gave it a static ip that's in the same subnet as the server. 
-I clicked on the Network settings of my VirtualBox, and folr the `Attached tp:` I changed it from `NAT` to `Host-only Adapter`
-At first, pinging the ip did not work, so I followed the following steps:
-On Desktop1, open Windows Defender Firewall.
-Go to Advanced settings > Inbound Rules.
-Find and enable the rule named File and Printer Sharing (Echo Request - ICMPv4-In).
-I tried pinging desktop1 from my server again, and it was now successful.
-![image](https://github.com/user-attachments/assets/67117df2-55b8-4e02-ac7f-1c7a6cc54592)
+## ⚙️ Installing Active Directory
 
-I added `Desktop 1` to my domain `ADLabs.com`- Open System Properties
+1. Renamed the server to `Server2022`.  
+   ![Rename Server](https://github.com/user-attachments/assets/afd670d5-8e86-42fe-9b37-6e99ff7ad28c)
 
-Press Windows + R, type sysdm.cpl, and press Enter
-or
+2. Opened **Server Manager** and navigated to:  
+   `Manage > Add Roles and Features > Next > Role-based > Next > Next`
 
-Right-click This PC on the desktop or in File Explorer, select Properties, then click Advanced system settings on the right.
+3. Selected:
+   - **Active Directory Domain Services**
+   - Clicked **Add Features > Next > Next > Install**
 
-Change Computer Name/Domain
+4. After installation, clicked on  
+   `Promote this server to a domain controller`.
 
-In the System Properties window, go to the Computer Name tab.
+5. Chose **Add a new forest** and named the root domain `ADLabs`.
 
-Click the Change... button.
+6. Set a password and completed the installation.
 
-Select Domain Membership
+7. After the reboot, opened **Active Directory Users and Computers** via  
+   `Server Manager > Tools` and pinned it to the taskbar.
 
-Under Member of, select Domain:
+---
 
-Enter your domain name (e.g., ADLabs.com).
+## 👤 Active Directory Account Creation
 
-Enter Domain Credentials
+1. Opened **Active Directory Administrative Center** from `Tools`.
 
-When prompted, enter the username and password of a domain account that has permission to join computers to the domain (typically a domain admin or a user with join rights).
+2. Selected my domain and enabled the **Recycle Bin**.
 
-I then went into my Windows Server and opened AD USers and Computers to confirm that `Desktop 1` joined the domain.
-![image](https://github.com/user-attachments/assets/d656a0e4-bf60-4b44-8a60-9239944090c2)
+3. Opened **AD Users and Computers**, went to `View > Advanced Features`.
 
-Next I opened `Desktop 1` and instead of signing in as the Administrator, I now signed in using the helpdesk account that I created earlier in the lab.
+4. Navigated to `Domain > Users`, right-clicked `Administrator`, and chose **Copy** to create a new Help Desk account with admin privileges.  
+   ![Help Desk Account](https://github.com/user-attachments/assets/3aa09aad-7954-4d76-bbee-8e5408a698a8)
+
+5. To verify the account details, I ran:
+
+   ```bash
+   net user helpdesk /domain
 
 
-I logged into the helpdesk account and opened AD Users and Computers. I right-clicked on my doamin name > New > Organizational Unit. 
-For the name I put in `HR`.
-I right-clicked on Users > New > User. I named my new User `John` and created a new password for him. I then cliked on John's name and moved him into the HR folder/OU.
-Next I created a New OU and named it `IT` then I moved the helpdedk into the IT Organizational Unit.
+## 🖧 Join Windows 10 PC to Domain + Install RSAT Tools
+
+1. Downloaded a **Windows 10 ISO** from the [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/).
+
+2. Launched the Windows 10 setup and selected **ISO file**, then saved it.
+   ![ISO Setup](https://github.com/user-attachments/assets/8ed45424-e6dc-4711-9725-1c1f2682b7f5)
+
+3. In VirtualBox:
+
+   * Clicked **New**, named it `Windows 10 Lab`
+   * Allocated **5 GB RAM**
+   * Attached the Windows 10 ISO as the startup disk
+
+4. Selected “I don’t have a product key” and chose **Windows 10 Pro** (Home edition can't join domains).
+
+5. After installation, opened **Control Panel** on `Desktop1` and assigned a **static IP** on the same subnet as the server.
+
+6. In VirtualBox, changed **Network Settings** from `NAT` to `Host-only Adapter`.
+
+7. At first, I couldn't ping the desktop. To fix it:
+
+   * Opened **Windows Defender Firewall** > **Advanced Settings**
+   * Enabled: `File and Printer Sharing (Echo Request - ICMPv4-In)`
+   * Ping was now successful
+     ![Ping Success](https://github.com/user-attachments/assets/67117df2-55b8-4e02-ac7f-1c7a6cc54592)
+
+---
+
+## 🏷️ Join PC to Domain
+
+8. Opened **System Properties**:
+
+   * `Win + R` → `sysdm.cpl` → Enter
+     *or*
+   * Right-click **This PC** → **Properties** → **Advanced system settings**
+
+9. Under the **Computer Name** tab, clicked **Change...**, selected **Domain**, and entered: `ADLabs.com`.
+
+10. Entered domain admin credentials when prompted.
+
+11. Back on the server, ran `ipconfig` to confirm the IP address.
+
+12. Opened **AD Users and Computers** to verify `Desktop1` successfully joined the domain.
+    ![Joined Domain](https://github.com/user-attachments/assets/d656a0e4-bf60-4b44-8a60-9239944090c2)
+
+---
+
+## 🛠️ Desktop Cleanup and RSAT Tool Installation
+
+13. On `Desktop1`:
+
+* Opened **Computer Management**
+* Went to `Local Users and Groups > Users`
+* Right-clicked `Administrator` → **Properties**
+* Checked **Password never expires**, unchecked all other options
+* Set a new password and signed in as Administrator
+
+14. Deleted the default `User` account and renamed the PC to: `Desktop1`.
+
+15. Installed **RSAT Tools** via:
+    `Settings > Apps & Features > Optional Features > Add a feature`
+    Installed:
+
+    * Active Directory Certificate Services
+    * Active Directory Domain Services
+    * DHCP Server Tools
+    * DNS Server Tools
+    * Group Policy
+    * Remote Desktop Services
+    * Server Manager
+      ![RSAT Tools](https://github.com/user-attachments/assets/93899a4e-3815-43b6-91ba-d79260c1730e)
+
+---
+
+## 👥 Domain Logon and Organizational Units
+
+16. Signed in as the **Helpdesk** domain user (created earlier in the lab).
+
+17. Opened **AD Users and Computers**:
+
+* Right-clicked domain name → **New > Organizational Unit** → Named it `HR`
+* Right-clicked `Users` > **New > User** → Created a new user named `John`
+* Moved `John` into the `HR` OU
+
+18. Created another **OU** named `IT` and moved the **Helpdesk** user into it.
+
 
 # Group Policy
 To view my Account Policies, I opened Group Policy Management > Domains > (Mydomain.com) > Default DOmain Policy > Settings.

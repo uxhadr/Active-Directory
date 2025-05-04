@@ -357,9 +357,12 @@ I opened up PDQ Deploy again and deployed Zoom onto `Desktop2`. I logged into de
 
 # Printer Setup, NTFS, Printer Cloud
 I opened up Server Manager > Manage > Add Roles & Features > Next > Next > Next > Print and Document Services > Add Features > Next > Next > Next > Next > Install.
-Back to Server Manager > Tools > Print Management > Print Servers > Right-click the blank space > Add Printer > Add a new printer using an existing port > Install a new driver > Next > HP Color LaserJet > Next > Uncheck Share this printer > Next > Next.
+
+Back to Server Manager > Tools > Print Management > Print Servers > Right-click the blank space > Add Printer > Add a new printer using an existing port > Next > Install a new driver > Next > MS Publisher Color Printer > Next > Uncheck Share this printer > Next > Next > Finish.
+
 Now the Printer showed up in my Print Management under Printers.
-[Insert Pic]
+![image](https://github.com/user-attachments/assets/a8e9d52f-163f-4172-9863-875e9a688565)
+
 From here, start following along. <Part 12 (6:14)>
 
 

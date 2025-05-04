@@ -322,7 +322,8 @@ That gave me the report of the Policies enforced on John's computer. I clicked o
 # Installing and Deploying PDQ, Software Packages
 I took my Server of static IP to install the CD image. I took a screenshot of the static IP so that I won't forget it.
 On VirtualBox, I clicked on Devices and chose the option to Insert Guest Additions CD image. Once I was done on my server I clicked on this PC and the CD image was mounted there. This CD will allow me to share stuff from my VM.
-[Insert Pic]
+![image](https://github.com/user-attachments/assets/8f5c828a-b758-4ea2-9dbf-c0857777d6b8)
+
 I opened my virtualbox settings for my Server2022 lab and clicked on Shared Folders > Add Share > Chose Downloads as the Path, created a new folder in `Downloads`, and named it ADLabs > Checked Auto-mount > OK.
 On the bottom right of my VirtualBox I right-clicked on the CD and hit remove disk from virtual drive. 
 I opened my web browser and downloaded `PDQ`, and `PDQ Inventory`, and saved it into the ADLabs Folder. I then grabbed the PDQ application and moved it to the desktop.
@@ -331,23 +332,28 @@ I pinged 8.8.8.8 to verify that I was connected to the internet.
 
 I hit PDQ > Install. It required me to install .Net Framework 4.8 and then it finished installing. 
 I also finished the installation for the PDQ Inventory
-I opened PDQ and went to package Library and installed `Zoom Client`. 
-I went to Packages > Right-clicked Zoom Client > Deploy Once > Choose Targets > Active Directory > Computers > Server2022 > OK > Deploy Now. Zoom was now installed on my Server's Desktop.
-[Insert pic where you can see both zoom on desktop and PDQ]
 
-I finished installing the PDQ inventory. I opened it up and clicked on All computers > Right-clicked Desktop2 > Run Report > Shared Folders. That showed me all the folders that were mapped on it.
-I cliked on the Computer and it gave me all the information about Desktop2.
-[Insert pic]
-I clicked on Applications which showed me what applications they had installed on their PC.
+I opened PDQ Deploy and went to the package Library and installed `PDFsam Basic`. 
+I went to Packages > Right-clicked PDFsam Basic > Deploy Once > Choose Targets > Active Directory > Computers > Server2022 > OK > Deploy Now. 
+PDFsam Basic was now installed on my Server's Desktop.
+![image](https://github.com/user-attachments/assets/2364f509-a54f-41d7-8f63-45c0c350147b)
+
+
+I finished installing the PDQ inventory.
+I right-clicked on all computers and added Desktop1 and Desktop2.
+I clicked on All computers > Right-clicked Server2022 > Run Report > Shared Folders. That showed me all the folders that were mapped on it.
+I clicked on the Computer and it gave me all the information about Desktop2.
+![image](https://github.com/user-attachments/assets/e2881996-2512-41fd-96e0-042ec1aad570)
 
 
 
 After this I went back into my settings and changed my server's Ip address back to static, and changed the Virtualbox network settings back to `Host-Only Adapter`.
 I pinged ADLabs.com to confirm that the static ip was working.
-[insert pic]
-I also restarted `Desktop2` from the PDQ Inventory app on my server.
+![image](https://github.com/user-attachments/assets/ebb98caa-cf6c-408f-bac3-3528c6c4913e)
+
 I opened up PDQ Deploy again and deployed Zoom onto `Desktop2`. I logged into desktop2 to confirm that zoom was downloaded.]
-[insert pic]
+![image](https://github.com/user-attachments/assets/7940dd54-6359-4d89-8d15-e70756fe15b1)
+
 
 # Printer Setup, NTFS, Printer Cloud
 I opened up Server Manager > Manage > Add Roles & Features > Next > Next > Next > Print and Document Services > Add Features > Next > Next > Next > Next > Install.

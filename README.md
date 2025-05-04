@@ -249,11 +249,6 @@ This project documents the process I followed to set up an Active Directory lab 
 5. Set up a **Personal Folder** for **John** in Active Directory under his **Profile > Home Folder** by mapping to `\\Server2022\Personal\%username%`.
    ![Personal Folder](https://github.com/user-attachments/assets/5704546d-01ab-445c-804e-4a20e5752396)
 
----
-
-Let me know if you'd like any adjustments!
-
-
 
 ### Remote Desktop
 
@@ -291,24 +286,38 @@ Finally, I connected to the **Desktop2** registry on **helpdesk** and was able t
 ![image](https://github.com/user-attachments/assets/1b26da27-dbca-4b75-a15c-00d3fbeb0128)
 
 
-[[[[[[[Start from here]]]]]]]]]]]]]]]]]]]
-Next, I opened remote assistance on desktop2 and clicked on Invite Someone to help you. On the helpdesk account, I opened Remote Assistance  and clicked on Use an invitaiton file > type in `\\desktop2\c$` > Users > John > Desktop > Invitation. I then put in the password that was showing up on John's Screen. Then on John's screen I clickd on yes to allow helpdesk to see whatever is going on on your desktop. Now I was able to see John's desktop from the helpdesk computer.
-[insert pic of both screens]
-I was also able to use the chat fuction to chat with John and ask them what was the issue.
+
+Next, I opened remote assistance on desktop2 and clicked on Invite Someone to help you > Save this invitation as a file > Save. It then gave me an invitation file and password.
+![image](https://github.com/user-attachments/assets/0b425b87-dbf2-42d1-89d8-19f147127079)
+
+On the helpdesk account, I opened Remote Assistance  and clicked on Use an invitation file > type in `\\desktop2\c$` > Users > John > Documents > Invitation.
+
+I then put in the password that was showing up on John's Screen. The on John's screen, I clicked on yes to allow helpdesk to see whatever is going on on your desktop. Now I was able to see John's desktop from the helpdesk computer.
+![image](https://github.com/user-attachments/assets/bf9170a0-99d1-4bf2-be6f-961d832edd36)
+
+I was also able to use the chat function to chat with John and ask them about the issue.
 
 # Group Policy, Task Manager, Disable Logoff
-I tried using the following commands to see how they worked: `gpupdate /force` , and `gpresult /r`
-On the helpdesk computer, I opened Group Policy Managemnt and right-cliked on `Group Policy Object` > New. Then named it Task Manager and hit OK.
-`Task Manager` was now under GPO. I clicked on it and selected `Delegation` > Add. Typed in 'John` and then hit OK, then put read permission only.
-Right-clicked Task Manager > Edit > Policies > Administrative Temp. I played around with this and saw different things that I could add and remove from John's account like the : 'Task bar, Remove Task Manager, Remove Change Passowrd, Remove Logoff'.
-After I changed different settings I went back to Group Policy Management and grabbed `Task Manager` from GPO and dragged it into `HR` since our User John is a part of that OU.
-[insert pic]
-I right-clicked on `Task Manager` and hit enforce, and then on John's compuer I ran the command `gpupadate /force` to apply the new policies.
+On the helpdesk computer, I opened Group Policy Management and right-cliked on `Group Policy Objects` > New. Then named it Task Manager and hit OK.
+`Task Manager` was now under GPO. I clicked on it and selected `Delegation` > Add. Typed in `John ` and then hit OK, then put read permission only.
+Right-clicked Task Manager > Edit > User Config > Policies > Administrative Temp > Sytem > Ctrl + Alt + Del.
+
+I enabled remove change Password for the user.
+I also enabled `Remove Task Manager` for users so that the users won't be able to launch task manager.
+I closed out the editor and went back to the `GP Management`. I grabbed the 
+grabbed the `Task Manager` object from GPO and dragged it into `HR`  Organizational Unit.
+![image](https://github.com/user-attachments/assets/dabb25d0-3b31-4846-8518-e50a048b8546)
+
+I right-clicked on `Task Manager` and hit enforced, and then on John's compuer I ran the command `gpupadate /force` to apply the new policies.
 I then ran the cmd: `gpresult /r` and saw that the Group Policy `Task Manager` was being applied.
-[Insert pic]
-I tried opening Task Manager as the user John but I wasn't able to. It was now blocked because of the `Task Manager` Group Policy
-To see the policies enforced on John's computer as the helpdesk, I opened Groujp Policy Management > Right-clicked GP Results > GP Resuslts Wizard > Next > Browse > Type : Desktop2 > Next > /John > Next > Next > Finish.
+![image](https://github.com/user-attachments/assets/c618e81c-5f91-4d21-983b-163554d821f5)
+
+I tried opening Task Manager as the user John but I wasn't able to. 
+![image](https://github.com/user-attachments/assets/913a4245-8849-427c-989b-6b78f439ece4)
+
+To see the policies enforced on John's computer,I logged into the helpdesk computer I opened Group Policy Management > Right-clicked GP Results > GP Resuslts Wizard > Next > Another computer > Browse > Type : Desktop2 > Next > /John > Next > Next > Finish.
 That gave me the report of the Policies enforced on John's computer. I clicked on Details and it showed me even more information about all the policies setup on John's computer.
+![image](https://github.com/user-attachments/assets/acb4cacc-ca64-431b-8fbf-75357caadc84)
 
 # Installing and Deploying PDQ, Software Packages
 I took my Server of static IP to install the CD image. I took a screenshot of the static IP so that I won't forget it.

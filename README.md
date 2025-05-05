@@ -363,22 +363,25 @@ Back to Server Manager > Tools > Print Management > Print Servers > Right-click 
 Now the Printer showed up in my Print Management under Printers.
 ![image](https://github.com/user-attachments/assets/a8e9d52f-163f-4172-9863-875e9a688565)
 
-From here, start following along. <Part 12 (6:14)>
-
-
 # Undersstanding Tickets Using Spiceworks, RDP Tools
 I went into my browser and looked up Spiceworks and then I went to start remote session and it gave me a code.
 I opened up `Desktop2` and removed the static ip so that it was connected to my internet. I set the Virtualbox network settings to `Bridged Adapter`, and in the advanced section I set `Allow` for the Promiscous mode.
 I then went to the website `join.zoho.com` and put in the session ID and a name.
-[insert pic]
+![image](https://github.com/user-attachments/assets/3fb802ae-7137-4c01-abf9-72696697e84f)
+
 I hit join session > Download > Run > Join.
 I went back to spiceworks which was opened on the helpdesk account and I was now able to remotely access `Desktop2`.
 I was able to open up the Command Prompt and chat with the user as I helped them out.
+![image](https://github.com/user-attachments/assets/eb147de8-2429-4e28-9ad9-970bc1bf7acc)
+
 
 # Understanding Delegate Control and Account Locked out 
-I opened up server manager and created a new user named `Scott`. Im going to act like Scott isn't fully part of our organization and he is just a vendor that needs limited access to some stuff. I also created a new OU named consultants and added him to it.
-[Inset pic]
+I opened up AD Users and Computers and created a new user named `Scott`. 
+I'm going to act like Scott isn't fully part of our organization, and he is just a vendor that needs limited access to some stuff. I also created a new OU named consultants and added him to it.
+![image](https://github.com/user-attachments/assets/9cba8821-af4b-4df9-b0cb-34fd6aa6ff38)
+
 I right-clicked on my domain name > Delegate Control > Next > Add > Typed in `Scott` > Next > Reset Password > Next > Finish.
+
 I logged in as scott and opened AD Users and Computers and opened the `HR` OU. I right clicked on the user John > Properties. The only thing Scott was able to do was reset John's password. All the other options were greyed out.
 [insert pic]
 saw that the only thing he was able to do was reset passwords.

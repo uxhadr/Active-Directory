@@ -1,3 +1,5 @@
+
+
 # 🖥️ Active Directory Lab Setup
 
 This project documents the process I followed to set up an Active Directory lab environment using VirtualBox and Windows Server 2022. The goal was to get hands-on practice with domain services, account management, and administrative tools.

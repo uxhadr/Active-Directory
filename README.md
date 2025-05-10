@@ -11,7 +11,7 @@ This lab demonstrates how to configure and manage a small Windows Active Directo
 
 This project documents the process I followed to set up an Active Directory lab environment using VirtualBox and Windows Server 2022. The goal was to get hands-on practice with domain services, account management, and administrative tools.
 
----
+
 
 ## 📦 Installing VirtualBox and Server 2022
 
@@ -20,7 +20,7 @@ This project documents the process I followed to set up an Active Directory lab 
 3. Set up a new VM in VirtualBox and attached the ISO.
 4. Launched the VM and selected **Desktop Experience** during Windows Setup.
 
----
+
 
 ## ⚙️ Installing Active Directory
 

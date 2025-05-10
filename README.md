@@ -289,107 +289,138 @@ Finally, I connected to the **Desktop2** registry on **helpdesk** and was able t
 
 
 
-Next, I opened remote assistance on desktop2 and clicked on Invite Someone to help you > Save this invitation as a file > Save. It then gave me an invitation file and password.
+## 🖥️ **Remote Assistance, Group Policy, and PDQ Software Deployment**
+
+---
+
+### 🔗 **Remote Assistance**
+
+Next, I opened Remote Assistance on Desktop2 and selected *Invite Someone to Help You* > *Save this invitation as a file* > *Save*. This generated both an invitation file and a password.
 ![image](https://github.com/user-attachments/assets/0b425b87-dbf2-42d1-89d8-19f147127079)
 
-On the helpdesk account, I opened Remote Assistance  and clicked on Use an invitation file > type in `\\desktop2\c$` > Users > John > Documents > Invitation.
+On the Helpdesk account, I opened Remote Assistance and clicked *Use an invitation file*. I navigated to `\\desktop2\c$` > Users > John > Documents > Invitation.
 
-I then put in the password that was showing up on John's Screen. The on John's screen, I clicked on yes to allow helpdesk to see whatever is going on on your desktop. Now I was able to see John's desktop from the helpdesk computer.
+After entering the password shown on John’s screen, a prompt appeared on his end. John clicked *Yes* to allow Helpdesk to view his desktop. At that point, I was able to remotely see John’s desktop from the Helpdesk computer.
 ![image](https://github.com/user-attachments/assets/bf9170a0-99d1-4bf2-be6f-961d832edd36)
 
-I was also able to use the chat function to chat with John and ask them about the issue.
+I also used the built-in chat function to talk with John and ask him about the issue he was having.
 
-# Group Policy, Task Manager, Disable Logoff
-On the helpdesk computer, I opened Group Policy Management and right-cliked on `Group Policy Objects` > New. Then named it Task Manager and hit OK.
-`Task Manager` was now under GPO. I clicked on it and selected `Delegation` > Add. Typed in `John ` and then hit OK, then put read permission only.
-Right-clicked Task Manager > Edit > User Config > Policies > Administrative Temp > Sytem > Ctrl + Alt + Del.
 
-I enabled remove change Password for the user.
-I also enabled `Remove Task Manager` for users so that the users won't be able to launch task manager.
-I closed out the editor and went back to the `GP Management`. I grabbed the 
-grabbed the `Task Manager` object from GPO and dragged it into `HR`  Organizational Unit.
+### 🔧 **Group Policy – Task Manager Restrictions**
+
+On the Helpdesk computer, I opened Group Policy Management, right-clicked `Group Policy Objects`, selected *New*, and named it *Task Manager*. Then I clicked OK.
+Now that *Task Manager* was listed under GPOs, I selected it, went to the *Delegation* tab, clicked *Add*, typed `John`, hit OK, and set the permission to *Read only*.
+
+Next, I right-clicked *Task Manager* > *Edit* > User Configuration > Policies > Administrative Templates > System > Ctrl + Alt + Del Options.
+
+I enabled *Remove Change Password* and also enabled *Remove Task Manager*, which prevents users from launching Task Manager.
+After that, I closed the editor and returned to Group Policy Management. I dragged the `Task Manager` GPO onto the `HR` Organizational Unit.
 ![image](https://github.com/user-attachments/assets/dabb25d0-3b31-4846-8518-e50a048b8546)
 
-I right-clicked on `Task Manager` and hit enforced, and then on John's compuer I ran the command `gpupadate /force` to apply the new policies.
-I then ran the cmd: `gpresult /r` and saw that the Group Policy `Task Manager` was being applied.
+I then right-clicked *Task Manager* and chose *Enforced*. On John's computer, I ran `gpupdate /force` to apply the changes.
+
+I confirmed that the policy was applied by running `gpresult /r` and saw that the `Task Manager` policy was listed.
 ![image](https://github.com/user-attachments/assets/c618e81c-5f91-4d21-983b-163554d821f5)
 
-I tried opening Task Manager as the user John but I wasn't able to. 
+When I tried opening Task Manager as the user John, it was blocked as expected.
 ![image](https://github.com/user-attachments/assets/913a4245-8849-427c-989b-6b78f439ece4)
 
-To see the policies enforced on John's computer,I logged into the helpdesk computer I opened Group Policy Management > Right-clicked GP Results > GP Resuslts Wizard > Next > Another computer > Browse > Type : Desktop2 > Next > /John > Next > Next > Finish.
-That gave me the report of the Policies enforced on John's computer. I clicked on Details and it showed me even more information about all the policies setup on John's computer.
+To get a more detailed view of what was applied, I used Group Policy Results from the Helpdesk machine: I opened Group Policy Management > right-clicked *Group Policy Results* > *GP Results Wizard* > Next > *Another computer* > browsed to `Desktop2` > selected John > Next > Finish.
+
+That generated a full policy report for John's machine. Clicking *Details* showed even more info about the applied settings.
 ![image](https://github.com/user-attachments/assets/acb4cacc-ca64-431b-8fbf-75357caadc84)
 
-# Installing and Deploying PDQ, Software Packages
-I took my Server of static IP to install the CD image. I took a screenshot of the static IP so that I won't forget it.
-On VirtualBox, I clicked on Devices and chose the option to Insert Guest Additions CD image. Once I was done on my server I clicked on this PC and the CD image was mounted there. This CD will allow me to share stuff from my VM.
+---
+
+### 💾 **Installing and Setting Up PDQ**
+
+I temporarily set my server to use a static IP so I could install the Guest Additions CD image. I also took a screenshot of the static IP just in case I needed it later.
+
+In VirtualBox, I clicked *Devices* > *Insert Guest Additions CD Image*. Once mounted, I opened *This PC* on the server and saw the CD loaded.
+
+This Guest Additions CD allows the VM to share folders between the host and guest OS.
 ![image](https://github.com/user-attachments/assets/8f5c828a-b758-4ea2-9dbf-c0857777d6b8)
 
-I opened my virtualbox settings for my Server2022 lab and clicked on Shared Folders > Add Share > Chose Downloads as the Path, created a new folder in `Downloads`, and named it ADLabs > Checked Auto-mount > OK.
-On the bottom right of my VirtualBox I right-clicked on the CD and hit remove disk from virtual drive. 
-I opened my web browser and downloaded `PDQ`, and `PDQ Inventory`, and saved it into the ADLabs Folder. I then grabbed the PDQ application and moved it to the desktop.
-I opened my Virtualbox network settings and selected Bridged Adapter. On my server I opened the control panel > View network status and tasks > change adapter settings > Righ-Click Ethernet > Rename > Obtain Ip address automatically > OK.
-I pinged 8.8.8.8 to verify that I was connected to the internet.
+Next, I opened the VirtualBox settings for my Server2022 lab and went to *Shared Folders* > *Add Share*. I selected the Downloads folder, created a new folder inside called *ADLabs*, checked *Auto-mount*, then clicked OK.
 
-I hit PDQ > Install. It required me to install .Net Framework 4.8 and then it finished installing. 
-I also finished the installation for the PDQ Inventory
+At the bottom right of VirtualBox, I right-clicked the CD icon and chose *Remove Disk from Virtual Drive*.
 
-I opened PDQ Deploy and went to the package Library and installed `PDFsam Basic`. 
-I went to Packages > Right-clicked PDFsam Basic > Deploy Once > Choose Targets > Active Directory > Computers > Server2022 > OK > Deploy Now. 
-PDFsam Basic was now installed on my Server's Desktop.
+I then opened a browser, downloaded `PDQ Deploy` and `PDQ Inventory`, and saved both installers into the *ADLabs* folder. I moved the PDQ Deploy installer to the desktop to start the install.
+
+I changed the server’s network setting in VirtualBox to *Bridged Adapter*. On the server, I went to *Control Panel* > *View network status and tasks* > *Change adapter settings* > right-clicked *Ethernet* > *Properties* > set to *Obtain IP address automatically* > OK.
+I pinged `8.8.8.8` to confirm I had internet access.
+
+PDQ required .NET Framework 4.8, which I installed first. After that, PDQ Deploy and PDQ Inventory installed successfully.
+
+---
+
+### 📦 **Deploying Software with PDQ**
+
+In PDQ Deploy, I opened the *Package Library* and downloaded `PDFsam Basic`.
+
+Then I went to *Packages* > right-clicked `PDFsam Basic` > *Deploy Once* > *Choose Targets* > *Active Directory* > *Computers* > *Server2022* > OK > *Deploy Now*.
+The software was successfully deployed and showed up on the Server desktop.
 ![image](https://github.com/user-attachments/assets/2364f509-a54f-41d7-8f63-45c0c350147b)
 
+After installing PDQ Inventory, I added Desktop1 and Desktop2 by right-clicking *All Computers* > *Add Computer*.
 
-I finished installing the PDQ inventory.
-I right-clicked on all computers and added Desktop1 and Desktop2.
-I clicked on All computers > Right-clicked Server2022 > Run Report > Shared Folders. That showed me all the folders that were mapped on it.
-I clicked on the Computer and it gave me all the information about Desktop2.
+I clicked on *All Computers*, right-clicked *Server2022*, and selected *Run Report* > *Shared Folders* to view all mapped folders.
+
+Clicking on each computer provided detailed info. I checked on Desktop2 and was able to see all the data PDQ Inventory collected.
 ![image](https://github.com/user-attachments/assets/e2881996-2512-41fd-96e0-042ec1aad570)
 
+### 🔁 Switching Server Back to Static IP & Deploying PDFsam Basic
 
+After this, I went back into my settings and changed my server’s IP address back to static. I also switched the VirtualBox network settings back to `Host-Only Adapter`.
 
-After this I went back into my settings and changed my server's Ip address back to static, and changed the Virtualbox network settings back to `Host-Only Adapter`.
-I pinged ADLabs.com to confirm that the static ip was working.
+I pinged `ADLabs.com` to confirm that the static IP configuration was working correctly.
 ![image](https://github.com/user-attachments/assets/ebb98caa-cf6c-408f-bac3-3528c6c4913e)
 
-I opened up PDQ Deploy again and deployed Zoom onto `Desktop2`. I logged into desktop2 to confirm that zoom was downloaded.]
+Next, I opened PDQ Deploy again and pushed PDFsam Basic onto `Desktop2`. I logged into Desktop2 to verify that PDFsam Basic had successfully installed.
 ![image](https://github.com/user-attachments/assets/7940dd54-6359-4d89-8d15-e70756fe15b1)
 
+---
 
-# Printer Setup, NTFS, Printer Cloud
-I opened up Server Manager > Manage > Add Roles & Features > Next > Next > Next > Print and Document Services > Add Features > Next > Next > Next > Next > Install.
+## 🖨️ Printer Setup, NTFS, and Printer Cloud
 
-Back to Server Manager > Tools > Print Management > Print Servers > Right-click the blank space > Add Printer > Add a new printer using an existing port > Next > Install a new driver > Next > MS Publisher Color Printer > Next > Uncheck Share this printer > Next > Next > Finish.
+I went to *Server Manager* > *Manage* > *Add Roles & Features* > Next > Next > Next, then selected *Print and Document Services* > *Add Features* > Next > Next > Next > Next > *Install*.
 
-Now the Printer showed up in my Print Management under Printers.
+Back in *Server Manager*, I opened *Tools* > *Print Management* > *Print Servers*. I right-clicked the blank area and selected *Add Printer*.
+Then I chose *Add a new printer using an existing port* > *Next* > *Install a new driver* > *Next* > selected *MS Publisher Color Printer* > *Next*. I unchecked *Share this printer* > *Next* > *Next* > *Finish*.
+
+The printer now appeared under *Print Management* > *Printers*.
 ![image](https://github.com/user-attachments/assets/a8e9d52f-163f-4172-9863-875e9a688565)
 
-# Undersstanding Tickets Using Spiceworks, RDP Tools
-I went into my browser and looked up Spiceworks and then I went to start remote session and it gave me a code.
-I opened up `Desktop2` and removed the static ip so that it was connected to my internet. I set the Virtualbox network settings to `Bridged Adapter`, and in the advanced section I set `Allow` for the Promiscous mode.
-I then went to the website `join.zoho.com` and put in the session ID and a name.
+---
+
+## 🧾 Understanding Tickets Using Spiceworks & RDP Tools
+
+I opened a browser, searched for Spiceworks, and started a remote session. It gave me a session code.
+
+On `Desktop2`, I removed the static IP so it could connect to the internet. I then switched the VirtualBox network settings to `Bridged Adapter`, and in the *Advanced* section, I set *Promiscuous Mode* to `Allow`.
+
+After that, I went to `join.zoho.com`, entered the session ID and a display name.
 ![image](https://github.com/user-attachments/assets/3fb802ae-7137-4c01-abf9-72696697e84f)
 
-I hit join session > Download > Run > Join.
-I went back to spiceworks which was opened on the helpdesk account and I was now able to remotely access `Desktop2`.
-I was able to open up the Command Prompt and chat with the user as I helped them out.
+I clicked *Join Session* > *Download* > *Run* > *Join*.
+
+Back on the helpdesk machine where Spiceworks was open, I was now able to remotely control `Desktop2`. I opened Command Prompt and used the built-in chat tool to help the user.
 ![image](https://github.com/user-attachments/assets/eb147de8-2429-4e28-9ad9-970bc1bf7acc)
 
+---
 
-# Understanding Delegate Control and Account Locked out 
-I opened up AD Users and Computers and created a new user named `Scott`. 
-I'm going to act like Scott isn't fully part of our organization, and he is just a vendor that needs limited access to some stuff. I also created a new OU named consultants and added him to it.
+## 🔐 Understanding Delegate Control & Account Lockout
+
+Inside *Active Directory Users and Computers*, I created a new user named `Scott`.
+
+I’m treating Scott as a vendor with limited permissions, so I created a new OU called *Consultants* and added him to it.
 ![image](https://github.com/user-attachments/assets/9cba8821-af4b-4df9-b0cb-34fd6aa6ff38)
 
-I right-clicked on my domain name > Delegate Control > Next > Add > Typed in `Scott` > Next > Reset Password > Next > Finish.
+Then I right-clicked on my domain > *Delegate Control* > *Next* > *Add* > typed in `Scott` > *Next* > chose *Reset user passwords and force password change at next logon* > *Next* > *Finish*.
 
-I logged in as Scott, opened AD Users and Computers, and opened the `HR` OU. I right clicked on the user John > Properties > Account. 
-The only thing Scott was able to do was reset John's password. All the other options were greyed out and I was not able to click on them.
-![image](https://github.com/user-attachments/assets/d92b9ba1-7c75-4a48-8276-294c35ca47b7)
+I logged in as Scott, opened AD Users and Computers, and browsed to the `HR` OU. I right-clicked on user *John* > *Properties* > *Account* tab.
 
-
-
+The only thing Scott was allowed to do was reset John’s password — all other options were grayed out and disabled.
 
 
 

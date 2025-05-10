@@ -1,4 +1,11 @@
+# Lab Summary
+This lab demonstrates how to configure and manage a small Windows Active Directory environment from a helpdesk perspective. Using technologies like Windows Server, Windows 10, and VirtualBox networking, the lab simulates common real-world scenarios faced by IT support professionals. Tasks include domain joining, troubleshooting user login issues, applying group policies, and managing shared folders and permissions across the domain
 
+# Skills Practiced
+* Creating and managing users and groups in Active Directory 
+* Joining client machines to a domain and troubleshooting trust issues
+* Setting up and applying Group Policy Objects (GPOs)
+* Implementing file sharing with proper NTFS and share permissions
 
 # 🖥️ Active Directory Lab Setup
 
